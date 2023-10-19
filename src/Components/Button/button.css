@@ -1,0 +1,31 @@
+.bnt-base {
+    color: #fff;
+}
+
+.bnt-base:hover {
+    color: #fff;
+}
+
+.btn-registro {
+    background-color: #008BD2;
+}
+
+.btn-registro:hover {
+    background-color: #0075af;
+}
+
+.paginaIncial {
+    background-color: #a20000;
+}
+
+.paginaIncial:hover {
+    background-color: #8a0101;
+}
+
+.salvar {
+    background-color: #048100;
+}
+
+.salvar:hover {
+    background-color: #036600;
+}
