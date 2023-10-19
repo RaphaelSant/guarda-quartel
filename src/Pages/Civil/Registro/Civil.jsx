@@ -33,7 +33,7 @@ export default function RegistroCivil() {
             setCivis(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         };
         getCivis();
-    }, []);
+    }, [db, civisCollectionRef]);
 
     async function deleteCivil(id) {
         const civilDoc = doc(db, "es_civis", id);
