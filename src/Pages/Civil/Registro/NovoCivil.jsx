@@ -1,23 +1,8 @@
-import React, { useState } from "react";
+/*import React, { useState } from "react";
 import { PaginaInicial } from "../../../Components/Button/Button";
 import Navbar from "../../../Components/Navbar/Navbar";
 
-/*FIREBASE CONFIG*/
-import { initializeApp } from "firebase/app";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
-
-const firebasApp = {
-    apiKey: "AIzaSyA3lRP5q3hjFWAJ076FHb2VpHVwVsMZAMA",
-    authDomain: "army-guard.firebaseapp.com",
-    projectId: "army-guard",
-    storageBucket: "army-guard.appspot.com",
-    messagingSenderId: "873158697255",
-    appId: "1:873158697255:web:a42515442d445145820902"
-};
-
-// Initialize Firebase
-initializeApp(firebasApp);
-
 
 export default function RegistroCivil() {
     const [nome, setNome] = useState("");
@@ -78,4 +63,4 @@ export default function RegistroCivil() {
         </div>
 
     </>
-}
+}*/

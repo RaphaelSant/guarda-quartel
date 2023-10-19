@@ -2,88 +2,158 @@ import React, { useEffect, useState } from "react";
 import { NovoRegistro, PaginaInicial } from "../../../Components/Button/Button";
 import Navbar from "../../../Components/Navbar/Navbar";
 import "./novocivil.css";
+import ministerioLogo from "../../Assets/ministerio-logo.jpg";
 
 /*FIREBASE CONFIG*/
-import { initializeApp } from "firebase/app";
-import { collection, deleteDoc, doc, getDocs, getFirestore } from "firebase/firestore";
+import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig.ts";
+
+import {
+    collection,
+    deleteDoc,
+    doc,
+    getDocs,
+    getFirestore,
+} from "firebase/firestore";
+
 import { Link } from "react-router-dom";
-
-const firebasApp = {
-    apiKey: "AIzaSyA3lRP5q3hjFWAJ076FHb2VpHVwVsMZAMA",
-    authDomain: "army-guard.firebaseapp.com",
-    projectId: "army-guard",
-    storageBucket: "army-guard.appspot.com",
-    messagingSenderId: "873158697255",
-    appId: "1:873158697255:web:a42515442d445145820902"
-};
-
-// Initialize Firebase
-initializeApp(firebasApp);
-
 
 export default function RegistroCivil() {
     const [civis, setCivis] = useState([]);
 
-    const db = getFirestore();
-    const civisCollectionRef = collection(db, "es_civis");
+    // Obter os dados dos civis no banco de dados e "setando" na useState civis
+    const getCivis = async () => {
+        iniciarFirestoreDb();
+        const db = getFirestore();
+        const civisCollectionRef = collection(db, "es_civis");
+        try {
+            const data = await getDocs(civisCollectionRef);
+            const civisData = data.docs.map((civiDoc) => ({
+                ...civiDoc.data(),
+                id: civiDoc.id,
+            }));
+            setCivis(civisData);
+        } catch (error) {
+            console.error("Erro ao buscar dados do Firestore:", error);
+        }
+    };
 
+    // Hook para executar a função getCivis() apenas uma vez, não sobrecarregando (leitura) no firestore.
     useEffect(() => {
-        const getCivis = async () => {
-            const data = await getDocs(civisCollectionRef)
-            setCivis(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        };
-        getCivis();
-    }, [db, civisCollectionRef]);
+        try {
+            getCivis();
+            console.log("Leitura do banco realizada");
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
 
-    async function deleteCivil(id) {
-        const civilDoc = doc(db, "es_civis", id);
-        await deleteDoc(civilDoc);
-        alert('Registro deletado');
-        window.location.reload();
-    }
+    // Função chamada pelo icone "trash" para deletar uma linha da tabela do banco
+    const deleteCivil = async (id) => {
+        iniciarFirestoreDb();
+        const db = getFirestore();
+        try {
+            const civilDoc = doc(db, "es_civis", id);
+            await deleteDoc(civilDoc);
+            setCivis(civis.filter((civi) => civi.id !== id)); // Atualize o estado local, excluindo o item
+            alert("Registro deletado");
+        } catch (error) {
+            console.error("Erro ao excluir registro:", error);
+        }
+    };
 
-    return <>
-        <Navbar />
-        <h5 className="mt-4 mb-4 text-center">Civil &gt; <strong style={{ color: '#008BD2' }}>Registro</strong></h5>
-        <div className="text-center mb-4">
-            <NovoRegistro link="/civis/civil/novoRegistro" titulo="Novo Registro" />
-            <PaginaInicial link="/" titulo="Página Inicial" />
-        </div>
-        <div className="container">
-            <table className="table text-center table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Nome</th>
-                        <th scope="col">CPF</th>
-                        <th scope="col">Entrada</th>
-                        <th scope="col">Saida</th>
-                        <th scope="col">Destino</th>
-                        <th scope="col">Ação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {civis.map((civis) => {
-                        let id = civis.id
-                        return (
-                            <tr key={civis.id}>
-                                <td>{civis.nome}</td>
-                                <td>{civis.cpf}</td>
-                                <td>{civis.horarioChegada}</td>
-                                <td>{civis.horarioSaida}</td>
-                                <td>{civis.destino}</td>
-                                <td className="d-flex justify-content-center gap-3">
-                                    <div>
-                                        <Link to={"/civis/civil/editarRegistro/"+id} ><button className="bnt-acao"><i className="fa-solid fa-pen-to-square fa-lg text-warning"></i></button></Link>
-                                    </div>
-                                    <div>
-                                        <button className="bnt-acao" onClick={() => deleteCivil(civis.id)}><i className="fa-solid fa-trash fa-lg text-danger"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-        </div >
-    </>
+    return (
+        <>
+            <Navbar />
+            <h5 className="mt-4 mb-4 text-center d-print-none">
+                Civil &gt; <strong style={{ color: "#008BD2" }}>Registro</strong>
+            </h5>
+            <div className="text-center mb-4 d-print-none">
+                <NovoRegistro link="/civis/civil/novoRegistro" titulo="Novo Registro" />
+                <PaginaInicial link="/" titulo="Página Inicial" />
+            </div>
+            <div className="container d-flex flex-column justify-content-center align-items-center">
+                <img
+                    src={ministerioLogo}
+                    width={"100px"}
+                    alt="sdasd"
+                    className="d-none d-print-block"
+                />
+                <div className="d-none d-print-block text-center">
+                    <p>
+                        <b>
+                            Ministério da Defesa
+                            <br />
+                            Exército Brasileiro
+                            <br />
+                            17° Pelotão de Comunicação de Selva
+                        </b>
+                    </p>
+
+                    <p>Entrada e Saída de Civis do Dia ___/___/____.</p>
+                </div>
+
+                <table className="table text-center table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">CPF</th>
+                            <th scope="col">Entrada</th>
+                            <th scope="col">Saida</th>
+                            <th scope="col">Destino</th>
+                            <th scope="col" className="d-print-none">
+                                Ação
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {civis.map((civis) => {
+                            let id = civis.id;
+                            return (
+                                <tr key={civis.id} className="align-middle">
+                                    <td>{civis.nome}</td>
+                                    <td>{civis.cpf}</td>
+                                    <td>{civis.horarioChegada}</td>
+                                    <td>{civis.horarioSaida}</td>
+                                    <td>{civis.destino}</td>
+                                    <td className="d-print-none">
+                                        <div className="d-flex align-items-center justify-content-center gap-3">
+                                            <div>
+                                                <Link to={"/civis/civil/editarRegistro/" + id}>
+                                                    <button className="bnt-acao">
+                                                        <i className="fa-solid fa-pen-to-square fa-lg text-warning"></i>
+                                                    </button>
+                                                </Link>
+                                            </div>
+                                            <div>
+                                                <button
+                                                    className="bnt-acao"
+                                                    onClick={() => deleteCivil(civis.id)}
+                                                >
+                                                    <i className="fa-solid fa-trash fa-lg text-danger"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+                <button
+                    className="btn btn-primary d-print-none"
+                    onClick={() => window.print()}
+                >
+                    <i className="fa-solid fa-print me-2"></i>Imprimir
+                </button>
+                <div className="d-none d-print-block text-center">
+                    <p>Quartel em Porto Velho - RO, ____/_____/______.</p>
+                    <p className="mt-5">
+                        ___________________________________________
+                        <br />
+                        Permanência 17º Pel Com Sl
+                    </p>
+                </div>
+            </div>
+        </>
+    );
 }
