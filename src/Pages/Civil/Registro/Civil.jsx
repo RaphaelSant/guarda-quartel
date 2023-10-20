@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { NovoRegistro, PaginaInicial } from "../../../Components/Button/Button";
 import Navbar from "../../../Components/Navbar/Navbar";
@@ -13,9 +14,10 @@ import {
     doc,
     getDocs,
     getFirestore,
+    orderBy,
+    query,
 } from "firebase/firestore";
 
-import { Link } from "react-router-dom";
 
 export default function RegistroCivil() {
     const [civis, setCivis] = useState([]);
@@ -26,7 +28,8 @@ export default function RegistroCivil() {
         const db = getFirestore();
         const civisCollectionRef = collection(db, "es_civis");
         try {
-            const data = await getDocs(civisCollectionRef);
+            //const data = await getDocs(civisCollectionRef);
+            const data = await getDocs(query(civisCollectionRef, orderBy("horarioChegada")));
             const civisData = data.docs.map((civiDoc) => ({
                 ...civiDoc.data(),
                 id: civiDoc.id,
@@ -146,7 +149,7 @@ export default function RegistroCivil() {
                     </tbody>
                 </table>
                 <button
-                    className="btn btn-primary d-print-none"
+                    className="mt-2 btn btn-lg btn-primary d-print-none"
                     onClick={() => window.print()}
                 >
                     <i className="fa-solid fa-print me-2"></i>Imprimir

@@ -38,25 +38,36 @@ export default function EditarRegistroCivil() {
                 setHorarioSaida(data.horarioSaida);
                 setDestino(data.destino);
             } catch (error) {
-                console.error("Erro ao obter dados do Firestore:", error);
+                // Mostrar um alerta de erro
+                window.alert("Algo deu errado: " + error.message);
             }
         }
         getCivis();
     }, [id]);
 
     // Função para ação update do botão ATUALZIAR
-    async function atualizarCivil() {
+    const atualizarCivil = async () => {
         iniciarFirestoreDb();
         const db = getFirestore();
         const docRef = doc(db, "es_civis", id);
 
-        await updateDoc(docRef, {
-            nome: nome,
-            cpf: cpf,
-            horarioChegada: horarioChegada,
-            horarioSaida: horarioSaida,
-            destino: destino,
-        });
+        try {
+            await updateDoc(docRef, {
+                nome: nome,
+                cpf: cpf,
+                horarioChegada: horarioChegada,
+                horarioSaida: horarioSaida,
+                destino: destino,
+            });
+            // Mostrar um alerta de sucesso
+            window.alert("Cadastro atualizado com sucesso.");
+            // Redirecionar para outra página
+            window.location.href = "/civis/civil";
+        } catch (error) {
+            // Mostrar um alerta de erro
+            window.alert("Erro ao atualizar: " + error.message);
+        }
+        
     }
 
     return (

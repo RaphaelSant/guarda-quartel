@@ -27,7 +27,7 @@ export default function RegistroCivil() {
             });
             // Mostrar um alerta de sucesso
             window.alert("Cadastro realizado com sucesso.");
-            // Redirecionar para outra página (substitua 'outra-pagina' pelo URL da página desejada)
+            // Redirecionar para outra página
             window.location.href = "/civis/civil";
         } catch (error) {
             // Mostrar um alerta de erro
