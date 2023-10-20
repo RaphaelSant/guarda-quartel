@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { NovoRegistro, PaginaInicial } from "../../../Components/Button/Button";
 import Navbar from "../../../Components/Navbar/Navbar";
 import "./novocivil.css";
-import ministerioLogo from "../../Assets/ministerio-logo.jpg";
 
 /*FIREBASE CONFIG*/
 import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig.ts";
@@ -17,6 +16,8 @@ import {
     orderBy,
     query,
 } from "firebase/firestore";
+import ImpressaoHeader from "../../../Components/Impressao/ImpressaoHeader";
+import ImpressaoFooter from "../../../Components/Impressao/ImpressaoFooter";
 
 
 export default function RegistroCivil() {
@@ -64,12 +65,6 @@ export default function RegistroCivil() {
         }
     };
 
-    // Capturando a data do sistema
-    const dateHoje = new Date(Date.now()).toLocaleString().split(',')[0];
-    let ontem = new Date().setHours(-1);
-    ontem = new Date(ontem); // o comando setHours devolve a data em milisegundos
-    const dataOntem = ontem.toLocaleDateString('pt-BR');
-
     return (
         <>
             <Navbar />
@@ -81,25 +76,8 @@ export default function RegistroCivil() {
                 <PaginaInicial link="/" titulo="Página Inicial" />
             </div>
             <div className="container d-flex flex-column justify-content-center align-items-center">
-                <img
-                    src={ministerioLogo}
-                    width={"100px"}
-                    alt="sdasd"
-                    className="d-none d-print-block"
-                />
-                <div className="d-none d-print-block text-center">
-                    <p>
-                        <b>
-                            Ministério da Defesa
-                            <br />
-                            Exército Brasileiro
-                            <br />
-                            17° Pelotão de Comunicação de Selva
-                        </b>
-                    </p>
 
-                    <p>Entrada e Saída de Civis do Dia {dataOntem}.</p>
-                </div>
+                <ImpressaoHeader titulo="Entrada e Saída de Civis" />
 
                 <table className="table text-center table-bordered">
                     <thead>
@@ -107,7 +85,7 @@ export default function RegistroCivil() {
                             <th scope="col">Nome</th>
                             <th scope="col">CPF</th>
                             <th scope="col">Entrada</th>
-                            <th scope="col">Saida</th>
+                            <th scope="col">Saída</th>
                             <th scope="col">Destino</th>
                             <th scope="col" className="d-print-none">
                                 Ação
@@ -154,11 +132,7 @@ export default function RegistroCivil() {
                 >
                     <i className="fa-solid fa-print me-2"></i>Imprimir
                 </button>
-                <div className="d-none d-print-block text-center">
-                    <p>Quartel em Porto Velho - RO, {dateHoje}.</p>
-                    <div className="underline mt-5"></div>
-                    <p>Permanência 17º Pel Com Sl</p>
-                </div>
+                <ImpressaoFooter />
             </div>
         </>
     );

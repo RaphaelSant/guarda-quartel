@@ -8,6 +8,7 @@ import NovoCivil from "./Pages/Civil/Registro/NovoCivil";
 import VeiculoCivil from "./Pages/Civil/Veiculo/VeiculoCivil";
 import NovoVeiculoCivil from "./Pages/Civil/Veiculo/NovoVeiculoCivil";
 import EditarRegistroCivil from "./Pages/Civil/Registro/EditarCivil";
+import EditarVeiculoCivil from "./Pages/Civil/Veiculo/EditarVeiculoCivil";
 
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
         
         <Route exact path="/civis/veiculoCivil" Component={VeiculoCivil} />
         <Route exact path="/civis/veiculoCivil/novoRegistro" Component={NovoVeiculoCivil} />
+        <Route exact path="/civis/veiculoCivil/editarRegistro/:id" Component={EditarVeiculoCivil} />
       </Routes>
     </BrowserRouter>
   );
