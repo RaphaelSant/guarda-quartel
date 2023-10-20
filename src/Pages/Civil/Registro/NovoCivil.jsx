@@ -1,76 +1,188 @@
 import React, { useState } from "react";
-import { PaginaInicial } from "../../../Components/Button/Button";
+import { Voltar } from "../../../Components/Button/Button";
 import Navbar from "../../../Components/Navbar/Navbar";
 
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig.ts";
 
 export default function RegistroCivil() {
-    const [nome, setNome] = useState("");
-    const [cpf, setCpf] = useState("");
-    const [horarioChegada, setHorarioChegada] = useState("");
-    const [horarioSaida, setHorarioSaida] = useState("");
-    const [destino, setDestino] = useState("");
+  const [nome, setNome] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [dataEntrada, setDataEntrada] = useState("");
+  const [horarioEntrada, setHorarioEntrada] = useState("");
+  const [destino, setDestino] = useState("");
 
-    async function cadastrarCivil() {
-        iniciarFirestoreDb();
-        const db = getFirestore();
-        const civisCollectionRef = collection(db, "es_civis");
+  async function cadastrarCivil() {
+    iniciarFirestoreDb();
+    const db = getFirestore();
+    const civisCollectionRef = collection(db, "es_civis");
 
-        try {
-            await addDoc(civisCollectionRef, {
-                nome,
-                cpf,
-                horarioChegada,
-                horarioSaida,
-                destino
-            });
-            // Mostrar um alerta de sucesso
-            window.alert("Cadastro realizado com sucesso.");
-            // Redirecionar para outra página
-            window.location.href = "/civis/civil";
-        } catch (error) {
-            // Mostrar um alerta de erro
-            window.alert("Erro ao cadastrar: " + error.message);
-        }
+    const horarioSaida = "OM";
+
+    try {
+      await addDoc(civisCollectionRef, {
+        nome,
+        cpf,
+        dataEntrada,
+        horarioSaida,
+        horarioEntrada,
+        destino,
+      });
+      // Mostrar um alerta de sucesso
+      window.alert("Cadastro realizado com sucesso.");
+      // Redirecionar para outra página
+      //window.location.replace("civil/civis");
+      window.location.href = "/civis/civil";
+    } catch (error) {
+      // Mostrar um alerta de erro
+      window.alert("Erro ao cadastrar: " + error.message);
+    }
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+
+    if (form.checkValidity()) {
+      cadastrarCivil();
     }
 
-    return <>
-        <Navbar />
-        <h5 className="mt-4 mb-4 text-center">Civil &gt; Registro &gt; <strong style={{ color: '#008BD2' }}>Novo Registro</strong></h5>
+    form.classList.add("was-validated");
+  };
 
-        <div className="container">
-            <div className="row">
-                <div className="mb-3 col-6">
-                    <label htmlFor="nome-completo" className="form-label">Nome Completo</label>
-                    <input type="text" placeholder="Nome Completo" className="form-control" value={nome} onChange={(e) => setNome(e.target.value)} id="nome-completo" />
-                </div>
-                <div className="mb-3 col-6">
-                    <label htmlFor="cpf" className="form-label">CPF</label>
-                    <input type="text" placeholder="CPF" className="form-control" value={cpf} onChange={(e) => setCpf(e.target.value)} id="cpf" />
-                </div>
-                <div className="mb-3 col-6">
-                    <label htmlFor="hora-entrada" className="form-label">Horário de Entrada</label>
-                    <input type="text" placeholder="Horário de Entrada" className="form-control" value={horarioChegada} onChange={(e) => setHorarioChegada(e.target.value)} id="hora-entrada" />
-                </div>
-                <div className="mb-3 col-6">
-                    <label htmlFor="hora-saida" className="form-label">Horário de Saída</label>
-                    <input type="text" placeholder="Horário de Saída" className="form-control" value={horarioSaida} onChange={(e) => setHorarioSaida(e.target.value)} id="hora-saida" />
-                </div>
-                <div className="mb-3 col-12">
-                    <label htmlFor="destino" className="form-label">Destino</label>
-                    <input type="text" placeholder="Destino" className="form-control" value={destino} onChange={(e) => setDestino(e.target.value)} id="destino" />
-                </div>
-            </div>
-        </div>
+  const dataHoje = new Date(Date.now()).toLocaleString().split(",")[0];
+  let data = new Date();
+  const horaAtual = `${data.getHours()}:${data.getMinutes()}`;
 
-        <div className="d-flex justify-content-center gap-4 text-center mb-4">
-            <div>
-                <PaginaInicial link="/civis/civil" titulo="Cancelar" />
-            </div>
-            <div>
-                <button onClick={() => cadastrarCivil()} className="btn btn-lg btn-success">Registrar Civil</button>
-            </div>
-        </div>
+  return (
+    <>
+      <Navbar />
+      <h5 className="mt-4 mb-4 text-center">
+        Civil &gt; Registro &gt;{" "}
+        <strong style={{ color: "#008BD2" }}>Novo Registro</strong>
+      </h5>
+
+      <div className="container">
+        <form
+          className="row g-3 needs-validation"
+          id="needs-validation"
+          onSubmit={handleSubmit}
+          noValidate
+        >
+          <div className="col-md-6">
+            <label htmlFor="nome-completo" className="form-label">
+              Nome Completo
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Insira o nome completo"
+              id="nome-completo"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+              required
+            />
+            <div className="valid-feedback">OK!</div>
+            <div className="invalid-feedback">Campo obrigatório.</div>
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="cpf" className="form-label">
+              CPF
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="cpf"
+              value={cpf}
+              placeholder="Insira o CPF"
+              onChange={(e) => setCpf(e.target.value)}
+              required
+            />
+            <div className="valid-feedback">OK!</div>
+            <div className="invalid-feedback">Campo obrigatório.</div>
+          </div>
+          <div className="col-md-4">
+            <label htmlFor="data-entrada" className="form-label">
+              Data de Entrada
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="data-entrada"
+              value={dataHoje}
+              placeholder="Insira o horário de saída"
+              onChange={(e) => setDataEntrada(e.target.value)}
+              required
+            />
+            <div className="valid-feedback">OK!</div>
+            <div className="invalid-feedback">Campo obrigatório.</div>
+          </div>
+          <div className="col-md-4">
+            <label htmlFor="hora-entrada" className="form-label">
+              Horário de Entrada
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="hora-entrada"
+              value={horaAtual}
+              placeholder="Insira o horário de entrada"
+              onChange={(e) => setHorarioEntrada(e.target.value)}
+              required
+            />
+            <div className="valid-feedback">OK!</div>
+            <div className="invalid-feedback">Campo obrigatório.</div>
+          </div>
+          <div className="col-md-4">
+            <label htmlFor="destino" className="form-label">
+              Destino
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="destino"
+              value={destino}
+              placeholder="Insira o destino"
+              onChange={(e) => setDestino(e.target.value)}
+              required
+            />
+            <div className="valid-feedback">OK!</div>
+            <div className="invalid-feedback">Campo obrigatório.</div>
+          </div>
+          <button type="submit" className="btn btn-lg btn-success">
+            Registrar Civil
+          </button>
+          <Voltar link="/civis/civil" />
+          <div className="col-md-6"></div>
+        </form>
+      </div>
+
+      <script>
+        {
+          // Example starter JavaScript for disabling form submissions if there are invalid fields
+          (() => {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.getElementsByClassName("needs-validation");
+
+            // Loop over them and prevent submission
+            Array.from(forms).forEach((form) => {
+              form.addEventListener(
+                "submit",
+                (event) => {
+                  if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                  } else {
+                    event.preventDefault();
+                  }
+                  form.classList.add("was-validated");
+                },
+                false
+              );
+            });
+          })()
+        }
+      </script>
     </>
+  );
 }
