@@ -1,8 +1,9 @@
-/*import React, { useState } from "react";
+import React, { useState } from "react";
 import { PaginaInicial } from "../../../Components/Button/Button";
 import Navbar from "../../../Components/Navbar/Navbar";
 
 import { addDoc, collection, getFirestore } from "firebase/firestore";
+import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig.ts";
 
 export default function RegistroCivil() {
     const [nome, setNome] = useState("");
@@ -11,17 +12,27 @@ export default function RegistroCivil() {
     const [horarioSaida, setHorarioSaida] = useState("");
     const [destino, setDestino] = useState("");
 
-    const db = getFirestore();
-    const civisCollectionRef = collection(db, "es_civis");
-
     async function cadastrarCivil() {
-        return await addDoc(civisCollectionRef, {
-            nome,
-            cpf,
-            horarioChegada,
-            horarioSaida,
-            destino
-        });
+        iniciarFirestoreDb();
+        const db = getFirestore();
+        const civisCollectionRef = collection(db, "es_civis");
+
+        try {
+            await addDoc(civisCollectionRef, {
+                nome,
+                cpf,
+                horarioChegada,
+                horarioSaida,
+                destino
+            });
+            // Mostrar um alerta de sucesso
+            window.alert("Cadastro realizado com sucesso.");
+            // Redirecionar para outra página (substitua 'outra-pagina' pelo URL da página desejada)
+            window.location.href = "/civis/civil";
+        } catch (error) {
+            // Mostrar um alerta de erro
+            window.alert("Erro ao cadastrar: " + error.message);
+        }
     }
 
     return <>
@@ -61,6 +72,5 @@ export default function RegistroCivil() {
                 <button onClick={() => cadastrarCivil()} className="btn btn-lg btn-success">Registrar Civil</button>
             </div>
         </div>
-
     </>
-}*/
+}

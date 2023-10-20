@@ -61,6 +61,12 @@ export default function RegistroCivil() {
         }
     };
 
+    // Capturando a data do sistema
+    const dateHoje = new Date(Date.now()).toLocaleString().split(',')[0];
+    let ontem = new Date().setHours(-1);
+    ontem = new Date(ontem); // o comando setHours devolve a data em milisegundos
+    const dataOntem = ontem.toLocaleDateString('pt-BR');
+
     return (
         <>
             <Navbar />
@@ -89,7 +95,7 @@ export default function RegistroCivil() {
                         </b>
                     </p>
 
-                    <p>Entrada e Saída de Civis do Dia ___/___/____.</p>
+                    <p>Entrada e Saída de Civis do Dia {dataOntem}.</p>
                 </div>
 
                 <table className="table text-center table-bordered">
@@ -146,12 +152,9 @@ export default function RegistroCivil() {
                     <i className="fa-solid fa-print me-2"></i>Imprimir
                 </button>
                 <div className="d-none d-print-block text-center">
-                    <p>Quartel em Porto Velho - RO, ____/_____/______.</p>
-                    <p className="mt-5">
-                        ___________________________________________
-                        <br />
-                        Permanência 17º Pel Com Sl
-                    </p>
+                    <p>Quartel em Porto Velho - RO, {dateHoje}.</p>
+                    <div className="underline mt-5"></div>
+                    <p>Permanência 17º Pel Com Sl</p>
                 </div>
             </div>
         </>
