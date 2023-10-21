@@ -20,6 +20,14 @@ export default function EditarRegistroCivil() {
   const [horarioSaida, setHorarioSaida] = useState("");
   const [destino, setDestino] = useState("");
 
+  // Adicione um estado para controlar se os campos estão editáveis
+  const [edicaoHabilitada, setEdicaoHabilitada] = useState(false);
+
+  // Função para alternar a habilitação dos campos
+  const alternarEdicao = () => {
+    setEdicaoHabilitada(!edicaoHabilitada);
+  };
+
   // Função para obter os dados do ID do registro e adiciona-los às constantes.
   useEffect(() => {
     async function getCivis() {
@@ -85,19 +93,19 @@ export default function EditarRegistroCivil() {
   return (
     <>
       <Navbar />
-      <h5 className="mt-4 mb-4 text-center">
+      <h5 className="mt-4 mb-0 text-center">
         Civil &gt; Registro &gt;{" "}
         <strong style={{ color: "#008BD2" }}>Editar Registro</strong>
       </h5>
-
+      <p className="text-center d-print-none">Entrada e Saída de Civis</p>
       <div className="container">
         <form
-          className="row g-3 needs-validation"
+          className={`row g-3 needs-validation ${edicaoHabilitada ? "editavel" : ""}`}
           id="needs-validation"
           onSubmit={handleSubmit}
           noValidate
         >
-          <div className="col-md-6">
+          <div className="col-md-4">
             <label htmlFor="nome-completo" className="form-label">
               Nome Completo
             </label>
@@ -108,11 +116,12 @@ export default function EditarRegistroCivil() {
               id="nome-completo"
               value={nome}
               onChange={(e) => setNome(e.target.value)}
+              disabled={!edicaoHabilitada}
             />
             <div className="valid-feedback">OK!</div>
             <div className="invalid-feedback">Campo obrigatório.</div>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-4">
             <label htmlFor="cpf" className="form-label">
               CPF
             </label>
@@ -124,6 +133,7 @@ export default function EditarRegistroCivil() {
               placeholder="Insira o CPF"
               onChange={(e) => setCpf(e.target.value)}
               required
+              disabled={!edicaoHabilitada}
             />
             <div className="valid-feedback">OK!</div>
             <div className="invalid-feedback">Campo obrigatório.</div>
@@ -137,9 +147,10 @@ export default function EditarRegistroCivil() {
               className="form-control"
               id="data-entrada"
               value={dataEntrada}
-              placeholder="Insira o horário de saída"
+              placeholder="Insira a data de entrada"
               onChange={(e) => setDataEntrada(e.target.value)}
               required
+              disabled={!edicaoHabilitada}
             />
             <div className="valid-feedback">OK!</div>
             <div className="invalid-feedback">Campo obrigatório.</div>
@@ -156,6 +167,7 @@ export default function EditarRegistroCivil() {
               placeholder="Insira o horário de entrada"
               onChange={(e) => setHorarioEntrada(e.target.value)}
               required
+              disabled={!edicaoHabilitada}
             />
             <div className="valid-feedback">OK!</div>
             <div className="invalid-feedback">Campo obrigatório.</div>
@@ -169,7 +181,7 @@ export default function EditarRegistroCivil() {
               className="form-control"
               id="hora-saida"
               value={horarioSaida}
-              placeholder="Insira o horário de entrada"
+              placeholder="Insira o horário de saida"
               onChange={(e) => setHorarioSaida(e.target.value)}
               required
             />
@@ -188,6 +200,7 @@ export default function EditarRegistroCivil() {
               placeholder="Insira o destino"
               onChange={(e) => setDestino(e.target.value)}
               required
+              disabled={!edicaoHabilitada}
             />
             <div className="valid-feedback">OK!</div>
             <div className="invalid-feedback">Campo obrigatório.</div>
@@ -196,6 +209,9 @@ export default function EditarRegistroCivil() {
             Atualizar Registro
           </button>
           <Voltar link="/civis/civil" />
+          <button type="button" className="btn btn-lg btn-secondary" onClick={alternarEdicao}>
+            {edicaoHabilitada ? "Bloquear Campos" : "Editar Campos"}
+          </button>
           <div className="col-md-6"></div>
         </form>
       </div>

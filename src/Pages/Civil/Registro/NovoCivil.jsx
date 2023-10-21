@@ -5,19 +5,20 @@ import Navbar from "../../../Components/Navbar/Navbar";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig.ts";
 
+import { capturaData, capturaHora } from "../../Assets/capturaDate.ts";
+
 export default function RegistroCivil() {
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
-  const [dataEntrada, setDataEntrada] = useState("");
-  const [horarioEntrada, setHorarioEntrada] = useState("");
+  const [dataEntrada, setDataEntrada] = useState(capturaData);
+  const [horarioEntrada, setHorarioEntrada] = useState(capturaHora);
+  const [horarioSaida] = useState("OM");
   const [destino, setDestino] = useState("");
 
   async function cadastrarCivil() {
     iniciarFirestoreDb();
     const db = getFirestore();
     const civisCollectionRef = collection(db, "es_civis");
-
-    const horarioSaida = "OM";
 
     try {
       await addDoc(civisCollectionRef, {
@@ -50,17 +51,14 @@ export default function RegistroCivil() {
     form.classList.add("was-validated");
   };
 
-  const dataHoje = new Date(Date.now()).toLocaleString().split(",")[0];
-  let data = new Date();
-  const horaAtual = `${data.getHours()}:${data.getMinutes()}`;
-
   return (
     <>
       <Navbar />
-      <h5 className="mt-4 mb-4 text-center">
+      <h5 className="mt-4 mb-0 text-center">
         Civil &gt; Registro &gt;{" "}
         <strong style={{ color: "#008BD2" }}>Novo Registro</strong>
       </h5>
+      <p className="text-center d-print-none">Entrada e Saída de Civis</p>
 
       <div className="container">
         <form
@@ -109,8 +107,8 @@ export default function RegistroCivil() {
               type="text"
               className="form-control"
               id="data-entrada"
-              value={dataHoje}
-              placeholder="Insira o horário de saída"
+              value={dataEntrada}
+              placeholder="Insira a data de entrada"
               onChange={(e) => setDataEntrada(e.target.value)}
               required
             />
@@ -125,7 +123,7 @@ export default function RegistroCivil() {
               type="text"
               className="form-control"
               id="hora-entrada"
-              value={horaAtual}
+              value={horarioEntrada}
               placeholder="Insira o horário de entrada"
               onChange={(e) => setHorarioEntrada(e.target.value)}
               required

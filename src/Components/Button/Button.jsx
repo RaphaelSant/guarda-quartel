@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export function NovoRegistro(props) {
   return (
     <Link to={props.link} className="btn bnt-base btn-lg btn-registro">
-      <i class="fa-solid fa-address-card me-2"></i>
+      <i className="fa-solid fa-address-card me-2"></i>
       {props.titulo}
     </Link>
   );
@@ -14,7 +14,7 @@ export function NovoRegistro(props) {
 export function PaginaInicial(props) {
   return (
     <Link to={props.link} className="btn bnt-base btn-lg paginaIncial  me-3">
-      <i class="fa-solid fa-house me-2"></i>
+      <i className="fa-solid fa-house me-2"></i>
       {props.titulo}
     </Link>
   );

@@ -20,7 +20,7 @@ export default function VeiculoCivil() {
         const veiculosCivisCollectionRef = collection(db, "es_veiculos_civis");
         try {
             //const data = await getDocs(veiculosCivisCollectionRef);
-            const data = await getDocs(query(veiculosCivisCollectionRef, orderBy("horarioEntrada")));
+            const data = await getDocs(query(veiculosCivisCollectionRef, orderBy("dataEntrada"), orderBy("horarioEntrada")));
             const veiculosCivisData = data.docs.map((civiDoc) => ({
                 ...civiDoc.data(),
                 id: civiDoc.id,
@@ -55,24 +55,37 @@ export default function VeiculoCivil() {
         }
     };
 
+    // Antes da função deleteVeiculoCivil() for executada, será solicitado ao usuário uma confirmação
+    const deleteCivilVeiculoConfirmacao = (id, nome, cpf) => {
+        const shouldDelete = window.confirm(
+            `Tem certeza de que deseja excluir este registro? Nome: ${nome} CNH: ${cpf}`
+        ); // Exibe um diálogo de confirmação
+
+        if (shouldDelete) {
+            deleteVeiculoCivil(id); // Chama a função de exclusão se o usuário confirmar
+        }
+    };
+
     // Capturando a data do sistema
     const dateHoje = new Date(Date.now()).toLocaleString().split(',')[0];
 
     return <>
         <Navbar />
-        <h5 className="mt-4 mb-4 text-center d-print-none">Civil &gt; <strong style={{ color: '#008BD2' }}>Veículo</strong></h5>
+        <h5 className="mt-4 mb-0 text-center d-print-none">Civil &gt; <strong style={{ color: '#008BD2' }}>Veículo</strong></h5>
+        <p className="text-center d-print-none">Entrada e Saída de Veículos Civis</p>
         <div className="text-center mb-4 d-print-none">
-            <NovoRegistro link="/civis/veiculoCivil/novoRegistro" titulo="Novo Registro" />
             <PaginaInicial link="/" titulo="Página Inicial" />
+            <NovoRegistro link="/civis/veiculoCivil/novoRegistro" titulo="Novo Registro" />
         </div>
         <div className="container d-flex flex-column justify-content-center align-items-center">
             <ImpressaoHeader titulo="Entrada e Saída de Veículos Civis" />
-            <table className="table text-center table-bordered">
+            <table className="table text-center table-bordered table-hover">
                 <thead>
                     <tr>
                         <th scope="col">Nome</th>
                         <th scope="col">CNH</th>
                         <th scope="col">Placa</th>
+                        <th scope="col">Data</th>
                         <th scope="col">Entrada</th>
                         <th scope="col">Saída</th>
                         <th scope="col">Destino</th>
@@ -87,8 +100,9 @@ export default function VeiculoCivil() {
                                 <td>{veiculosCivis.nome}</td>
                                 <td>{veiculosCivis.cnh}</td>
                                 <td>{veiculosCivis.placa}</td>
+                                <td>{veiculosCivis.dataEntrada}</td>
                                 <td>{veiculosCivis.horarioEntrada}</td>
-                                <td>{veiculosCivis.horarioSaida}</td>
+                                <td className={`${veiculosCivis.horarioSaida === "OM" ? 'bg-danger text-white fw-bold' : ''}`}>{veiculosCivis.horarioSaida}</td>
                                 <td>{veiculosCivis.destino}</td>
                                 <td className="d-print-none">
                                     <div className="d-flex align-items-center justify-content-center gap-3">
@@ -102,7 +116,7 @@ export default function VeiculoCivil() {
                                         <div>
                                             <button
                                                 className="bnt-acao"
-                                                onClick={() => deleteVeiculoCivil(veiculosCivis.id)}
+                                                onClick={() => deleteCivilVeiculoConfirmacao(veiculosCivis.id, veiculosCivis.nome, veiculosCivis.cnh)}
                                             >
                                                 <i className="fa-solid fa-trash fa-lg text-danger"></i>
                                             </button>

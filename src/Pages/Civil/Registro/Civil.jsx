@@ -87,9 +87,10 @@ export default function RegistroCivil() {
   return (
     <>
       <Navbar />
-      <h5 className="mt-4 mb-4 text-center d-print-none">
+      <h5 className="mt-4 mb-0 text-center d-print-none">
         Civil &gt; <strong style={{ color: "#008BD2" }}>Registro</strong>
       </h5>
+      <p className="text-center d-print-none">Entrada e Saída de Civis</p>
       <div className="text-center mb-4 d-print-none">
         <PaginaInicial link="/" titulo="Página Inicial" />
         <NovoRegistro link="/civis/civil/novoRegistro" titulo="Novo Registro" />
@@ -120,7 +121,7 @@ export default function RegistroCivil() {
                   <td>{civis.cpf}</td>
                   <td>{civis.dataEntrada}</td>
                   <td>{civis.horarioEntrada}</td>
-                  <td className={`${civis.horarioSaida === "OM" ? 'text-danger fw-bold' : ''}`}>{civis.horarioSaida}</td>
+                  <td className={`${civis.horarioSaida === "OM" ? 'bg-danger text-white fw-bold' : ''}`}>{civis.horarioSaida}</td>
                   <td>{civis.destino}</td>
                   <td className="d-print-none">
                     <div className="d-flex align-items-center justify-content-center gap-3">

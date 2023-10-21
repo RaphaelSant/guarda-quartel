@@ -25,7 +25,7 @@ export default function ImpressaoHeader(props) {
                     </b>
                 </p>
 
-                <p>{props.titulo} do Dia {dataOntem}.</p>
+                <p>{props.titulo} DO DIA {dataOntem}.</p>
             </div>
         </>
     );
