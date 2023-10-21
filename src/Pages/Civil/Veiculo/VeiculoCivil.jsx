@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { NovoRegistro, PaginaInicial } from "../../../Components/Button/Button";
 import Navbar from "../../../Components/Navbar/Navbar";
-import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig.ts";
 import { collection, deleteDoc, doc, getDocs, getFirestore, orderBy, query } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import "./veiculoscivil.css";
 
 import ImpressaoHeader from "../../../Components/Impressao/ImpressaoHeader";
+import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig";
 
 
 export default function VeiculoCivil() {

@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Voltar } from "../../../Components/Button/Button";
-import Navbar from "../../../Components/Navbar/Navbar";
-import "./veiculoscivil.css";
-
 import { doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
-import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig";
+
+import { Voltar } from "../../../../Components/Button/Button";
+import Navbar from "../../../../Components/Navbar/Navbar";
 
 
-export default function EditarVeiculoCivil() {
+import { capturaData, capturaHora } from "../../../Assets/capturaDate";
+import iniciarFirestoreDb from "../../../FirestoreConfig/firestoreConfig";
+
+export default function EditarDuranteExpediente() {
     // Obetendo o id do registro passado pela URL (Router)
     const { id } = useParams();
 
     // Variaveis locais para alteração no banco de dados.
-    const [nome, setNome] = useState("");
-    const [cnh, setCnh] = useState("");
-    const [placa, setPlaca] = useState("");
-    const [dataEntrada, setDataEntrada] = useState("");
-    const [horarioEntrada, setHorarioEntrada] = useState("");
-    const [horarioSaida, setHorarioSaida] = useState("");
-    const [destino, setDestino] = useState("");
-
+    const [pg, setPg] = useState("");
+    const [nomeGuerra, setNomeGuerra] = useState("");
+    const [idtMilitar, setIdtMilitar] = useState("");
+    const [om, setOm] = useState("");
+    const [dataEntrada, setDataEntrada] = useState(capturaData);
+    const [horarioEntrada, setHorarioEntrada] = useState(capturaHora);
+    const [horarioSaida, setHorarioSaida] = useState("OM");
+    const [origem, setOrigem] = useState("");
     // Adicione um estado para controlar se os campos estão editáveis
     const [edicaoHabilitada, setEdicaoHabilitada] = useState(false);
 
@@ -31,77 +32,78 @@ export default function EditarVeiculoCivil() {
 
     // Função para obter os dados do ID do registro e adiciona-los às constantes.
     useEffect(() => {
-        async function getVeiculosCivis() {
+        async function getMilitares() {
             iniciarFirestoreDb();
             const db = getFirestore();
             try {
                 // Documento de referência passando como parametro o BD, tabela e ID do campo que será alterado.
-                const docRef = doc(db, "es_veiculos_civis", id);
+                const docRef = doc(db, "es_mil_durante_expediente", id);
                 const docSnap = await getDoc(docRef);
                 const data = docSnap.data();
 
                 // Os dados serão "setados" nas variaveis locais.
-                setNome(data.nome);
-                setCnh(data.cnh);
-                setPlaca(data.placa);
+                setPg(data.pg);
+                setNomeGuerra(data.nomeGuerra);
+                setIdtMilitar(data.idtMilitar);
+                setOm(data.om);
                 setDataEntrada(data.dataEntrada);
                 setHorarioEntrada(data.horarioEntrada);
                 setHorarioSaida(data.horarioSaida);
-                setDestino(data.destino);
+                setOrigem(data.origem);
             } catch (error) {
                 // Mostrar um alerta de erro
                 window.alert("Algo deu errado: " + error.message);
             }
         }
-        getVeiculosCivis();
+        getMilitares();
     }, [id]);
 
     // Função para ação update do botão ATUALZIAR
-    const atualizarVeiculoCivil = async () => {
+
+    const atualizarMilitar = async () => {
         iniciarFirestoreDb();
         const db = getFirestore();
-        const docRef = doc(db, "es_veiculos_civis", id);
+        const docRef = doc(db, "es_mil_durante_expediente", id);
 
         try {
             await updateDoc(docRef, {
-                nome: nome,
-                cnh: cnh,
-                placa: placa,
+                pg: pg,
+                nomeGuerra: nomeGuerra,
+                idtMilitar: idtMilitar,
+                om: om,
                 dataEntrada: dataEntrada,
                 horarioEntrada: horarioEntrada,
                 horarioSaida: horarioSaida,
-                destino: destino,
+                origem: origem,
             });
             // Mostrar um alerta de sucesso
             window.alert("Cadastro atualizado com sucesso.");
             // Redirecionar para outra página
-            window.location.href = "/civis/veiculoCivil";
+            window.location.href = "/militares/duranteExpediente";
         } catch (error) {
             // Mostrar um alerta de erro
             window.alert("Erro ao atualizar: " + error.message);
         }
-
-    }
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
 
         if (form.checkValidity()) {
-            atualizarVeiculoCivil();
+            atualizarMilitar();
         }
 
         form.classList.add("was-validated");
     };
-
     return (
         <>
             <Navbar />
             <h5 className="mt-4 mb-0 text-center">
-                Civil &gt; Veículo &gt;{" "}
+                Militares &gt; Durante o expediente &gt;{" "}
                 <strong style={{ color: "#008BD2" }}>Editar Registro</strong>
             </h5>
-            <p className="text-center d-print-none">Entrada e Saída de Veículos Civis</p>
+            <p className="text-center d-print-none">ENTRADA E SAÍDA DE MILITARES DURANTE HORÁRIO DE EXPEDIENTE</p>
 
             <div className="container">
                 <form
@@ -110,50 +112,71 @@ export default function EditarVeiculoCivil() {
                     onSubmit={handleSubmit}
                     noValidate
                 >
-                    <div className="col-md-4">
-                        <label htmlFor="nome-completo" className="form-label">
-                            Nome Completo
+                    <div className="col-md-3">
+                        <label className="form-label" htmlFor="pg">Posto Graduação</label>
+                        <select className="form-select" id="pg" onChange={(e) => setPg(e.target.value)} disabled={!edicaoHabilitada}>
+                            <option defaultValue={pg}>{pg}</option>
+                            <option value="Soldado">Soldado</option>
+                            <option value="Taifeiro">Taifeiro</option>
+                            <option value="Cabo">Cabo</option>
+                            <option value="Sargento">Sargento</option>
+                            <option value="Subtenente">Subtenente</option>
+                            <option value="Aspirante a Oficial">Aspirante a Oficial</option>
+                            <option value="Tenente">Tenente</option>
+                            <option value="Capitão">Capitão</option>
+                            <option value="Major">Major</option>
+                            <option value="Tenente-Coronel">Tenente-Coronel</option>
+                            <option value="Coronel">Coronel</option>
+                            <option value="General de Brigada">General de Brigada</option>
+                            <option value="General de Divisão">General de Divisão</option>
+                            <option value="General de Exército">General de Exército</option>
+                            <option value="Marechal">Marechal</option>
+                        </select>
+                    </div>
+                    <div className="col-md-3">
+                        <label htmlFor="nome-guerra" className="form-label">
+                            Nome de Guerra
                         </label>
                         <input
                             type="text"
                             className="form-control"
-                            placeholder="Insira o nome completo"
-                            id="nome-completo"
-                            value={nome}
-                            onChange={(e) => setNome(e.target.value)}
+                            placeholder="Insira o nome de guerra"
+                            id="nome-guerra"
+                            value={nomeGuerra}
+                            onChange={(e) => setNomeGuerra(e.target.value)}
                             disabled={!edicaoHabilitada}
                         />
                         <div className="valid-feedback">OK!</div>
                         <div className="invalid-feedback">Campo obrigatório.</div>
                     </div>
-                    <div className="col-md-4">
-                        <label htmlFor="cnh" className="form-label">
-                            CNH
+                    <div className="col-md-3">
+                        <label htmlFor="idtMilitar" className="form-label">
+                            Identidade Militar
                         </label>
                         <input
                             type="text"
                             className="form-control"
-                            id="cnh"
-                            value={cnh}
-                            placeholder="Insira a CNH"
-                            onChange={(e) => setCnh(e.target.value)}
+                            id="idtMilitar"
+                            value={idtMilitar}
+                            placeholder="Insira a identidade militar"
+                            onChange={(e) => setIdtMilitar(e.target.value)}
                             required
                             disabled={!edicaoHabilitada}
                         />
                         <div className="valid-feedback">OK!</div>
                         <div className="invalid-feedback">Campo obrigatório.</div>
                     </div>
-                    <div className="col-md-4">
-                        <label htmlFor="placa" className="form-label">
-                            Placa do veículo
+                    <div className="col-md-3">
+                        <label htmlFor="om" className="form-label">
+                            Organização Militar
                         </label>
                         <input
                             type="text"
                             className="form-control"
-                            id="placa"
-                            value={placa}
-                            placeholder="Insira a Placa"
-                            onChange={(e) => setPlaca(e.target.value)}
+                            id="om"
+                            value={om}
+                            placeholder="Insira a organização militar"
+                            onChange={(e) => setOm(e.target.value)}
                             required
                             disabled={!edicaoHabilitada}
                         />
@@ -203,7 +226,7 @@ export default function EditarVeiculoCivil() {
                             className="form-control"
                             id="hora-saida"
                             value={horarioSaida}
-                            placeholder="Insira o horário de saída"
+                            placeholder="Insira o horário de saida"
                             onChange={(e) => setHorarioSaida(e.target.value)}
                             required
                         />
@@ -211,16 +234,16 @@ export default function EditarVeiculoCivil() {
                         <div className="invalid-feedback">Campo obrigatório.</div>
                     </div>
                     <div className="col-md-3">
-                        <label htmlFor="destino" className="form-label">
-                            Destino
+                        <label htmlFor="origem" className="form-label">
+                            Origem
                         </label>
                         <input
                             type="text"
                             className="form-control"
-                            id="destino"
-                            value={destino}
-                            placeholder="Insira o destino"
-                            onChange={(e) => setDestino(e.target.value)}
+                            id="origem"
+                            value={origem}
+                            placeholder="Insira a origem"
+                            onChange={(e) => setOrigem(e.target.value)}
                             required
                             disabled={!edicaoHabilitada}
                         />
@@ -230,10 +253,11 @@ export default function EditarVeiculoCivil() {
                     <button type="submit" className="btn btn-lg btn-success">
                         Atualizar Registro
                     </button>
-                    <Voltar link="/civis/veiculoCivil" />
+                    <Voltar link="/militares/duranteExpediente" />
                     <button type="button" className="btn btn-lg btn-secondary" onClick={alternarEdicao}>
                         {edicaoHabilitada ? "Bloquear Campos" : "Editar Campos"}
                     </button>
+                    <div className="col-md-6"></div>
                 </form>
             </div>
 

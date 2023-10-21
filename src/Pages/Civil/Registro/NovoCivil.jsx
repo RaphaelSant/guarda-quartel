@@ -3,9 +3,9 @@ import { Voltar } from "../../../Components/Button/Button";
 import Navbar from "../../../Components/Navbar/Navbar";
 
 import { addDoc, collection, getFirestore } from "firebase/firestore";
-import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig.ts";
 
-import { capturaData, capturaHora } from "../../Assets/capturaDate.ts";
+import { capturaData, capturaHora } from "../../Assets/capturaDate";
+import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig";
 
 export default function RegistroCivil() {
   const [nome, setNome] = useState("");

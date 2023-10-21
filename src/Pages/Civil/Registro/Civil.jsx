@@ -9,7 +9,7 @@ import Navbar from "../../../Components/Navbar/Navbar";
 import "./novocivil.css";
 
 /*FIREBASE CONFIG*/
-import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig.ts";
+import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig";
 
 import {
   collection,

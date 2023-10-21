@@ -8,7 +8,7 @@ import {
 import Navbar from "../../../../Components/Navbar/Navbar";
 
 /*FIREBASE CONFIG*/
-import iniciarFirestoreDb from "../../../FirestoreConfig/firestoreConfig.ts";
+import iniciarFirestoreDb from "../../../FirestoreConfig/firestoreConfig";
 
 import {
     collection,
@@ -138,7 +138,7 @@ export default function DuranteExpediente() {
                                             <div>
                                                 <button
                                                     className="bnt-acao"
-                                                    onClick={() => deleteMilitarConfirmacao(id, militar.nomeGuerra, militar.postoGraduacao)}
+                                                    onClick={() => deleteMilitarConfirmacao(id, militar.nomeGuerra, militar.pg)}
                                                 >
                                                     <i className="fa-solid fa-trash fa-lg text-danger"></i>
                                                 </button>

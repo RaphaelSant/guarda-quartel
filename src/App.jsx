@@ -9,9 +9,12 @@ import VeiculoCivil from "./Pages/Civil/Veiculo/VeiculoCivil";
 import NovoVeiculoCivil from "./Pages/Civil/Veiculo/NovoVeiculoCivil";
 import EditarRegistroCivil from "./Pages/Civil/Registro/EditarCivil";
 import EditarVeiculoCivil from "./Pages/Civil/Veiculo/EditarVeiculoCivil";
-import DuranteExpediente from "./Pages/Militares/MilitaresOM/DuarenteExpediente/DuranteExpediente";
-import NovoDuranteExpediente from "./Pages/Militares/MilitaresOM/DuarenteExpediente/NovoDuranteExpediente";
-import EditarDuranteExpediente from "./Pages/Militares/MilitaresOM/DuarenteExpediente/EditarDuranteExpediente";
+import DuranteExpediente from "./Pages/Militares/MilitaresOM/DuranteExpediente/DuranteExpediente";
+import NovoDuranteExpediente from "./Pages/Militares/MilitaresOM/DuranteExpediente/NovoDuranteExpediente";
+import EditarDuranteExpediente from "./Pages/Militares/MilitaresOM/DuranteExpediente/EditarDuranteExpediente";
+import ForaExpediente from "./Pages/Militares/MilitaresOM/ForaExpediente/ForaExpediente";
+import NovoForaExpediente from "./Pages/Militares/MilitaresOM/ForaExpediente/NovoForaExpediente";
+import EditarForaExpediente from "./Pages/Militares/MilitaresOM/ForaExpediente/EditarForaExpediente";
 
 
 export default function App() {
@@ -33,6 +36,10 @@ export default function App() {
         <Route exact path="/militares/duranteExpediente" Component={DuranteExpediente} />
         <Route exact path="/militares/duranteExpediente/novoRegistro" Component={NovoDuranteExpediente} />
         <Route exact path="/militares/duranteExpediente/editarRegistro/:id" Component={EditarDuranteExpediente} />
+
+        <Route exact path="/militares/foraExpediente" Component={ForaExpediente} />
+        <Route exact path="/militares/foraExpediente/novoRegistro" Component={NovoForaExpediente} />
+        <Route exact path="/militares/foraExpediente/editarRegistro/:id" Component={EditarForaExpediente} />
       </Routes>
     </BrowserRouter>
   );

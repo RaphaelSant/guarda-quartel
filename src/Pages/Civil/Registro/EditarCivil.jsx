@@ -5,8 +5,7 @@ import "./novocivil.css";
 
 import { doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
-
-import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig.ts";
+import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig";
 
 export default function EditarRegistroCivil() {
   // Obetendo o id do registro passado pela URL (Router)
