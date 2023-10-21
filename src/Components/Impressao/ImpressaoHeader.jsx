@@ -21,7 +21,7 @@ export default function ImpressaoHeader(props) {
                         <br />
                         Exército Brasileiro
                         <br />
-                        17° Pelotão de Comunicação de Selva
+                        17° Pelotão de Comunicações de Selva
                     </b>
                 </p>
 
