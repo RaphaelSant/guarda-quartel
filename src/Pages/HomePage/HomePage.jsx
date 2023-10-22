@@ -24,7 +24,7 @@ export default function HomePage() {
             <hr />
             <h3>Outras Organizações Militares</h3>
             <div className="card-home mt-2">
-                <CardOutrasOm link="www.google.com" titulo="Viatura" />
+                <CardOutrasOm link="/militares/viaturasDeOutrasOms" titulo="Viatura" />
             </div>
             <hr />
             <h3>Relatório</h3>

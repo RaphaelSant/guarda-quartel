@@ -18,6 +18,9 @@ import EditarForaExpediente from "./Pages/Militares/MilitaresOM/ForaExpediente/E
 import ViaturasDoPelotao from "./Pages/Militares/MilitaresOM/ViaturasDoPelotao/ViaturasPelotao";
 import NovoViaturasPelotao from "./Pages/Militares/MilitaresOM/ViaturasDoPelotao/NovoViaturasPelotao";
 import EditarViaturasPelotao from "./Pages/Militares/MilitaresOM/ViaturasDoPelotao/EditarViaturasPelotao";
+import ViaturasOutraOm from "./Pages/Militares/MilitaresOOM/ViaturasOutraOm";
+import NovoViaturasOutraOm from "./Pages/Militares/MilitaresOOM/NovoViaturasOutraOm";
+import EditarViaturasOutraOm from "./Pages/Militares/MilitaresOOM/EditarViaturasOutraOm";
 
 
 export default function App() {
@@ -47,6 +50,10 @@ export default function App() {
         <Route exact path="/militares/viaturasDoPelotao" Component={ViaturasDoPelotao} />
         <Route exact path="/militares/viaturasDoPelotao/novoRegistro" Component={NovoViaturasPelotao} />
         <Route exact path="/militares/viaturasDoPelotao/editarRegistro/:id" Component={EditarViaturasPelotao} />
+
+        <Route exact path="/militares/viaturasDeOutrasOms" Component={ViaturasOutraOm} />
+        <Route exact path="/militares/viaturasDeOutrasOms/novoRegistro" Component={NovoViaturasOutraOm} />
+        <Route exact path="/militares/viaturasDeOutrasOms/editarRegistro/:id" Component={EditarViaturasOutraOm} />
       </Routes>
     </BrowserRouter>
   );
