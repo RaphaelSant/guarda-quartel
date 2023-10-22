@@ -19,7 +19,7 @@ export default function HomePage() {
             <div className="card-home mt-2">
                 <CardMilitares link="/militares/duranteExpediente" titulo="Durante o expediente" />
                 <CardMilitares link="/militares/foraExpediente" titulo="Fora de expediente" />
-                <CardMilitares link="www.google.com" titulo="Viatura do pelotão" />
+                <CardMilitares link="/militares/viaturasDoPelotao" titulo="Viatura do pelotão" />
             </div>
             <hr />
             <h3>Outras Organizações Militares</h3>
