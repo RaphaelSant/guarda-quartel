@@ -21,6 +21,7 @@ import EditarViaturasPelotao from "./Pages/Militares/MilitaresOM/ViaturasDoPelot
 import ViaturasOutraOm from "./Pages/Militares/MilitaresOOM/ViaturasOutraOm";
 import NovoViaturasOutraOm from "./Pages/Militares/MilitaresOOM/NovoViaturasOutraOm";
 import EditarViaturasOutraOm from "./Pages/Militares/MilitaresOOM/EditarViaturasOutraOm";
+import RoteiroDaGuarda from "./Pages/Relatorio/RoteiroDaGuarda";
 
 
 export default function App() {
@@ -51,9 +52,14 @@ export default function App() {
         <Route exact path="/militares/viaturasDoPelotao/novoRegistro" Component={NovoViaturasPelotao} />
         <Route exact path="/militares/viaturasDoPelotao/editarRegistro/:id" Component={EditarViaturasPelotao} />
 
+        {/* CAMPOS MILITARES DE OUTRAS OMs */}
         <Route exact path="/militares/viaturasDeOutrasOms" Component={ViaturasOutraOm} />
         <Route exact path="/militares/viaturasDeOutrasOms/novoRegistro" Component={NovoViaturasOutraOm} />
         <Route exact path="/militares/viaturasDeOutrasOms/editarRegistro/:id" Component={EditarViaturasOutraOm} />
+
+        {/* CAMPOS DE RELATÓRIO DA OM */}
+        <Route exact path="/relatorio/roteiroDaGuarda" Component={RoteiroDaGuarda} />
+        
       </Routes>
     </BrowserRouter>
   );
