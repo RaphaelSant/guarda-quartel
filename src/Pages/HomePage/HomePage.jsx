@@ -30,7 +30,7 @@ export default function HomePage() {
             <h3>Relatório</h3>
             <div className="card-home mt-2">
                 <CardRelatorio link="/relatorio/roteiroDaGuarda" titulo="Roteiro da Guarda" />
-                <CardRelatorio link="www.google.com" titulo="Escala de Ronda" />
+                <CardRelatorio link="/relatorio/escalaDeRonda" titulo="Escala de Ronda" />
                 <CardRelatorio link="www.google.com" titulo="Parte do Representante do Cmdo" />
                 <CardRelatorio link="www.google.com" titulo="Armazenar Serviço" />
                 <CardRelatorio link="www.google.com" titulo="Serviço Anterior" />

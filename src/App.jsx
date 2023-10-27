@@ -22,6 +22,9 @@ import ViaturasOutraOm from "./Pages/Militares/MilitaresOOM/ViaturasOutraOm";
 import NovoViaturasOutraOm from "./Pages/Militares/MilitaresOOM/NovoViaturasOutraOm";
 import EditarViaturasOutraOm from "./Pages/Militares/MilitaresOOM/EditarViaturasOutraOm";
 import RoteiroDaGuarda from "./Pages/Relatorio/RoteiroDaGuarda";
+import EscalaDeRonda from "./Pages/Relatorio/EscalaDeRonda";
+import EditarEscalaRonda from "./Pages/Relatorio/EditarEscalaRonda";
+import EditarRoteiroGuarda from "./Pages/Relatorio/EditarRoteiroDaGuarda";
 
 
 export default function App() {
@@ -59,6 +62,9 @@ export default function App() {
 
         {/* CAMPOS DE RELATÓRIO DA OM */}
         <Route exact path="/relatorio/roteiroDaGuarda" Component={RoteiroDaGuarda} />
+        <Route exact path="/relatorio/roteiroDaGuarda/editarRoteiroGuarda" Component={EditarRoteiroGuarda} />
+        <Route exact path="/relatorio/escalaDeRonda" Component={EscalaDeRonda} />
+        <Route exact path="/relatorio/escalaDeRonda/editarEscalaRonda" Component={EditarEscalaRonda} />
         
       </Routes>
     </BrowserRouter>

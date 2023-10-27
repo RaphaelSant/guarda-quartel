@@ -56,7 +56,7 @@ export default function RoteiroDaGuarda() {
       <div className="text-center mb-4 d-print-none">
         <PaginaInicial link="/" titulo="Página Inicial" />
         <NovoRegistro
-          link="/civis/civil/novoRegistro"
+          link="/relatorio/roteiroDaGuarda/editarRoteiroGuarda"
           titulo="Editar Registros"
         />
       </div>
