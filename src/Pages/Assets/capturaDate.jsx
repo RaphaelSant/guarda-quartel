@@ -12,3 +12,27 @@ export function capturaData() {
     const ano = data.getFullYear();
     return `${dia}/${mes}/${ano}`;
 }
+
+export function capturaMes() {
+    const data = new Date();
+    const mesExtenso = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"][data.getMonth()];
+    return mesExtenso;
+}
+
+export function capturaAno() {
+    const data = new Date();
+    const ano = data.getFullYear();
+    return ano;
+}
+
+export function capturaDia() {
+    const data = new Date();
+    const dia = String(data.getDate()).padStart(2, '0'); // Adiciona zeros à esquerda, se necessário
+    return dia;
+}
+
+//console.log(capturaData());
+
+//console.log(capturaDia());
+//console.log(capturaMes());
+//console.log(capturaAno());

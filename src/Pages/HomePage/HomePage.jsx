@@ -31,7 +31,7 @@ export default function HomePage() {
             <div className="card-home mt-2">
                 <CardRelatorio link="/relatorio/roteiroDaGuarda" titulo="Roteiro da Guarda" />
                 <CardRelatorio link="/relatorio/escalaDeRonda" titulo="Escala de Ronda" />
-                <CardRelatorio link="www.google.com" titulo="Parte do Representante do Cmdo" />
+                <CardRelatorio link="/relatorio/parteSargentoPermanencia" titulo="Parte do Representante do Cmdo" />
                 <CardRelatorio link="www.google.com" titulo="Armazenar Serviço" />
                 <CardRelatorio link="www.google.com" titulo="Serviço Anterior" />
             </div>

@@ -25,6 +25,8 @@ import RoteiroDaGuarda from "./Pages/Relatorio/RoteiroDaGuarda";
 import EscalaDeRonda from "./Pages/Relatorio/EscalaDeRonda";
 import EditarEscalaRonda from "./Pages/Relatorio/EditarEscalaRonda";
 import EditarRoteiroGuarda from "./Pages/Relatorio/EditarRoteiroDaGuarda";
+import ParteSargentoPermanencia from "./Pages/Relatorio/ParteSgtPermanencia";
+import EditarParteSgtPemanencia from "./Pages/Relatorio/EditarParteSgtPermanencia";
 
 
 export default function App() {
@@ -65,6 +67,8 @@ export default function App() {
         <Route exact path="/relatorio/roteiroDaGuarda/editarRoteiroGuarda" Component={EditarRoteiroGuarda} />
         <Route exact path="/relatorio/escalaDeRonda" Component={EscalaDeRonda} />
         <Route exact path="/relatorio/escalaDeRonda/editarEscalaRonda" Component={EditarEscalaRonda} />
+        <Route exact path="/relatorio/parteSargentoPermanencia" Component={ParteSargentoPermanencia} />
+        <Route exact path="/relatorio/parteSargentoPermanencia/editarParte" Component={EditarParteSgtPemanencia} />
         
       </Routes>
     </BrowserRouter>
