@@ -121,10 +121,10 @@ export default function EditarRoteiroGuarda() {
         <>
             <Navbar />
             <h5 className="mt-4 mb-0 text-center">
-                Militares &gt; Durante o expediente &gt;{" "}
-                <strong style={{ color: "#008BD2" }}>Editar Registro</strong>
+                Relatório &gt; Roteiro da Guarda &gt;{" "}
+                <strong style={{ color: "#008BD2" }}>Editar Registros</strong>
             </h5>
-            <p className="text-center d-print-none">ENTRADA E SAÍDA DE MILITARES DURANTE HORÁRIO DE EXPEDIENTE</p>
+            <p className="text-center d-print-none">ROTEIRO DA GUARDA</p>
 
             <div className="container">
                 <form
