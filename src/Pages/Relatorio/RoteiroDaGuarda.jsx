@@ -16,6 +16,7 @@ import ImpressaoFooter from "../../Components/Impressao/ImpressaoFooter";
 
 export default function RoteiroDaGuarda() {
   const [militares, setMilitares] = useState([]);
+  let identificacao = "";
 
   // Obter os dados dos militares no banco de dados e "setando" na useState militares
   const getMilitares = async () => {
@@ -45,6 +46,12 @@ export default function RoteiroDaGuarda() {
     }
   }, []);
 
+  militares.map((militar) => {
+    return (
+      identificacao = militar.id
+    );
+  });
+
   return (
     <>
       <Navbar />
@@ -56,7 +63,7 @@ export default function RoteiroDaGuarda() {
       <div className="text-center mb-4 d-print-none">
         <PaginaInicial link="/" titulo="Página Inicial" />
         <NovoRegistro
-          link="/relatorio/roteiroDaGuarda/editarRoteiroGuarda"
+          link={"/relatorio/roteiroDaGuarda/editarRoteiroGuarda/" + identificacao}
           titulo="Editar Registros"
         />
       </div>

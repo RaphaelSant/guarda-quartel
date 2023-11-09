@@ -27,6 +27,7 @@ import EditarEscalaRonda from "./Pages/Relatorio/EditarEscalaRonda";
 import EditarRoteiroGuarda from "./Pages/Relatorio/EditarRoteiroDaGuarda";
 import ParteSargentoPermanencia from "./Pages/Relatorio/ParteSgtPermanencia";
 import EditarParteSgtPemanencia from "./Pages/Relatorio/EditarParteSgtPermanencia";
+import ArmazenarServico from "./Pages/ArmazenarServico/ArmazenarServico";
 
 
 export default function App() {
@@ -64,12 +65,15 @@ export default function App() {
 
         {/* CAMPOS DE RELATÓRIO DA OM */}
         <Route exact path="/relatorio/roteiroDaGuarda" Component={RoteiroDaGuarda} />
-        <Route exact path="/relatorio/roteiroDaGuarda/editarRoteiroGuarda" Component={EditarRoteiroGuarda} />
+        <Route exact path="/relatorio/roteiroDaGuarda/editarRoteiroGuarda/:id" Component={EditarRoteiroGuarda} />
         <Route exact path="/relatorio/escalaDeRonda" Component={EscalaDeRonda} />
-        <Route exact path="/relatorio/escalaDeRonda/editarEscalaRonda" Component={EditarEscalaRonda} />
+        <Route exact path="/relatorio/escalaDeRonda/editarEscalaRonda/:id" Component={EditarEscalaRonda} />
         <Route exact path="/relatorio/parteSargentoPermanencia" Component={ParteSargentoPermanencia} />
-        <Route exact path="/relatorio/parteSargentoPermanencia/editarParte" Component={EditarParteSgtPemanencia} />
-        
+        <Route exact path="/relatorio/parteSargentoPermanencia/editarParte/:id" Component={EditarParteSgtPemanencia} />
+
+        {/* CAMPO ARMAZENAGEM DE SERVIÇO */}
+        <Route exact path="/relatorio/armazenarServico" Component={ArmazenarServico} />
+
       </Routes>
     </BrowserRouter>
   );

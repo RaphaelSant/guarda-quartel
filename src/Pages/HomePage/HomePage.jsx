@@ -32,7 +32,7 @@ export default function HomePage() {
                 <CardRelatorio link="/relatorio/roteiroDaGuarda" titulo="Roteiro da Guarda" />
                 <CardRelatorio link="/relatorio/escalaDeRonda" titulo="Escala de Ronda" />
                 <CardRelatorio link="/relatorio/parteSargentoPermanencia" titulo="Parte do Representante do Cmdo" />
-                <CardRelatorio link="www.google.com" titulo="Armazenar Serviço" />
+                <CardRelatorio link="/relatorio/armazenarServico" titulo="Armazenar Serviço" />
                 <CardRelatorio link="www.google.com" titulo="Serviço Anterior" />
             </div>
         </div>

@@ -16,6 +16,7 @@ import { capturaAno, capturaDia, capturaMes } from "../Assets/capturaDate";
 
 export default function ParteSargentoPermanencia() {
     const [parteSgtPemanencia, setParteSgtPemanencia] = useState([]);
+    let identificacaoSgtPerm = "";
     const [militares, setMilitares] = useState([]);
 
     // Obter os dados dos militares no banco de dados e "setando" na useState militares
@@ -83,9 +84,12 @@ export default function ParteSargentoPermanencia() {
             totalFPonta,
             consumoTotalAtual,
             consumoTotalAnterior,
-            consumoGeral
+            consumoGeral,
+            identificacaoSgtPerm = dados.id
         );
     });
+
+    console.log(identificacaoSgtPerm);
 
     return (
         <>
@@ -98,7 +102,7 @@ export default function ParteSargentoPermanencia() {
             <div className="text-center mb-4 d-print-none">
                 <PaginaInicial link="/" titulo="Página Inicial" />
                 <NovoRegistro
-                    link="/relatorio/parteSargentoPermanencia/editarParte"
+                    link={"/relatorio/parteSargentoPermanencia/editarParte/" + identificacaoSgtPerm}
                     titulo="Editar Parte"
                 />
             </div>
@@ -120,13 +124,13 @@ export default function ParteSargentoPermanencia() {
                 <div className="container">
                     {parteSgtPemanencia.map((parteSgt) => {
                         return (
-                            <div>
+                            <div key={parteSgt.id}>
                                 <p className="my-1"><b>01 – Parada Diária:</b> {parteSgt.paradaDiaria}</p>
                                 <p className="my-1"><b>02 – Recebimento do Serviço:</b> {parteSgt.recebimentoServico}</p>
                                 <p className="my-1"><b>03 – Pessoal de Serviço:</b> {parteSgt.pessoalServico}</p>
                                 {militares.map((militares) => {
                                     return (
-                                        <table className="table table-bordered table-hover">
+                                        <table className="table table-bordered table-hover" key={militares.id}>
                                             <tbody>
                                                 <tr>
                                                     <td><b>Cmt da Gda: </b>{militares.sgtNomeGuerra}</td>
