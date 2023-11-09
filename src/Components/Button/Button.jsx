@@ -28,6 +28,14 @@ export function Voltar(props) {
   );
 }
 
+export function Cancelar(props) {
+  return (
+    <Link to={props.link} className="btn btn-success w-100 mt-2">
+      Cancelar
+    </Link>
+  );
+}
+
 export function Imprimir() {
   return (
     <button

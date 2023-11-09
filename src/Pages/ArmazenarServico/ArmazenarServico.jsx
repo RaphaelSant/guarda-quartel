@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import iniciarFirestoreDb from "../FirestoreConfig/firestoreConfig";
 import {
   addDoc,
@@ -7,7 +7,8 @@ import {
   getDocs,
   getFirestore,
 } from "firebase/firestore";
-import { Voltar } from "../../Components/Button/Button";
+import { Cancelar } from "../../Components/Button/Button";
+import Navbar from "../../Components/Navbar/Navbar";
 
 export default function ArmazenarServico() {
   iniciarFirestoreDb();
@@ -28,22 +29,8 @@ export default function ArmazenarServico() {
     });
   }
 
-  useEffect(() => {
-    try {
-      //bkESCivis();
-      //bkESVeiculosCivis();
-      //bkESMilDuranteExpediente();
-      //bkESMilForaExpediente();
-      //bkESVtrPelotao();
-      //bkVtrOutraOm();
-      console.log("bkESCivis realizado");
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
   // Função para apagar os documentos de BK_ES_Civis realizar a cópia de ES_Civis e apagar ES_Civis.
-  const bkESCivis = async () => {
+  async function bkESCivis() {
     try {
       const origemCollection = collection(db, "es_civis");
       const destinoCollection = collection(db, "bk_es_civis");
@@ -84,7 +71,7 @@ export default function ArmazenarServico() {
     } catch (error) {
       console.error("Erro ao copiar documentos:", error);
     }
-  };
+  }
 
   // Função para apagar os documentos de BK_ES_Veiculos_Civis realizar a cópia de BK_ES_Veiculos_Civis e apagar ES_Civis.
   async function bkESVeiculosCivis() {
@@ -324,7 +311,7 @@ export default function ArmazenarServico() {
       const origemCollection = collection(db, "roteiroDaGuarda");
       const destinoCollection = collection(db, "bk_roteiroDaGuarda");
 
-      // excluirTodosDocumentosDaColecao(destinoCollection);
+      excluirTodosDocumentosDaColecao(destinoCollection);
       //console.log("Documentos do destino apagados!");
 
       // Recupera os documentos da coleção de origem
@@ -372,7 +359,7 @@ export default function ArmazenarServico() {
         });
         //console.log("Documentos copiados com sucesso!");
 
-        excluirTodosDocumentosDaColecao(origemCollection);
+        //excluirTodosDocumentosDaColecao(origemCollection);
         //console.log("Documentos da origem apagados!");
       });
     } catch (error) {
@@ -380,27 +367,169 @@ export default function ArmazenarServico() {
     }
   }
 
+  // Função para apagar os documentos de BK_roteiroDaGuarda realizar a cópia de roteiroDaGuarda e apagar roteiroDaGuarda.
+  async function bkParteSgtPerm() {
+    try {
+      const origemCollection = collection(db, "parte-sgt-permanencia");
+      const destinoCollection = collection(db, "bk_parte-sgt-permanencia");
+
+      excluirTodosDocumentosDaColecao(destinoCollection);
+      //console.log("Documentos do destino apagados!");
+
+      // Recupera os documentos da coleção de origem
+      const dataOrigem = await getDocs(origemCollection);
+      const origemData = dataOrigem.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+
+      // Salva os dados em variaveis para posterior gravação
+      origemData.forEach(async (doc) => {
+        const armtoMunicao = doc.armtoMunicao;
+        const bombaAgua = doc.bombaAgua;
+        const cameras = doc.cameras;
+        const claviculario = doc.claviculario;
+        const conForaPontaAnterior = doc.conForaPontaAnterior;
+        const conForaPontaAtual = doc.conForaPontaAtual;
+        const consPontaAnterior = doc.consPontaAnterior;
+        const consPontaAtual = doc.consPontaAtual;
+        const correspondencias = doc.correspondencias;
+        const dependencias = doc.dependencias;
+        const lixeiras = doc.lixeiras;
+        const materialCarga = doc.materialCarga;
+        const ocorrencias = doc.ocorrencias;
+        const paradaDiaria = doc.paradaDiaria;
+        const passagemServico = doc.passagemServico;
+        const pessoalServico = doc.pessoalServico;
+        const radios = doc.radios;
+        const rancho = doc.rancho;
+        const recebimentoServico = doc.recebimentoServico;
+        const revistaRecolher = doc.revistaRecolher;
+        const viaturas = doc.viaturas;
+
+        // Copia os documentos da coleção de origem para a coleção de destino
+        await addDoc(destinoCollection, {
+          armtoMunicao,
+          bombaAgua,
+          cameras,
+          claviculario,
+          conForaPontaAnterior,
+          conForaPontaAtual,
+          consPontaAnterior,
+          consPontaAtual,
+          correspondencias,
+          dependencias,
+          lixeiras,
+          materialCarga,
+          ocorrencias,
+          paradaDiaria,
+          passagemServico,
+          pessoalServico,
+          radios,
+          rancho,
+          recebimentoServico,
+          revistaRecolher,
+          viaturas,
+        });
+
+        //console.log("Documentos copiados com sucesso!");
+
+        //excluirTodosDocumentosDaColecao(origemCollection);
+        //console.log("Documentos da origem apagados!");
+      });
+    } catch (error) {
+      console.error("Erro ao copiar documentos:", error);
+    }
+  }
+
+  const handleArmazenarServico = async () => {
+    await bkESCivis();
+    await bkESVeiculosCivis();
+    await bkESMilDuranteExpediente();
+    await bkESMilForaExpediente();
+    await bkESVtrPelotao();
+    await bkVtrOutraOm();
+    await bkRoteiroGuarda();
+    await bkParteSgtPerm();
+    alert("Armazenagem do Serviço Realizada!");
+    window.location.href = "/";
+  };
+
   return (
-    <div>
-      <h1>Menu Civis</h1>
-      
-      <button onClick={bkESVeiculosCivis}>BK ES Veiculos Civis</button>
-      <button onClick={bkESCivis}>BK ES Civis</button>
-      <h1>Menu Militares</h1>
-      <button onClick={bkESMilDuranteExpediente}>
-        BK ES Militares Durante o Expediente
-      </button>
-      <button onClick={bkESMilForaExpediente}>
-        BK ES Militares Fora do Expediente
-      </button>
-      <button onClick={bkESVtrPelotao}>BK ES Viaturas do Pelotão</button>
+    <>
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Armazenar Serviço
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              Os dados ficaram disponíveis apenas para consulta e impressão por
+              um período de 24 horas (Até a passagem do serviço atual) no Menu
+              "Serviço Anterior".
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Fechar
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                onClick={handleArmazenarServico}
+              >
+                Armazenar Serviço
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <h1>Menu Outras Oms</h1>
-      <button onClick={bkVtrOutraOm}>BK Viaturas de Outras OMs</button>
-
-      <h1>Relatórios</h1>
-      <button onClick={bkRoteiroGuarda}>BK Roteiro da Guarda</button>
-      <Voltar link="/" />
-    </div>
+      <Navbar />
+      <div className="container">
+        <h5 className="mt-4 mb-0 text-center d-print-none">
+          Relatório &gt;{" "}
+          <strong style={{ color: "#008BD2" }}>Armazenar Serviço</strong>
+        </h5>
+        <p className="text-center d-print-none">Amazenamento de Serviço</p>
+        <div className="w-50 m-auto">
+          <p className="text-justify">
+            O Menu "Armazenar Serviço" é uma ferramenta extremamente delicada.
+            Ao utilizá-lo, você estará arquivando suas informações atuais,
+            tornando-as disponíveis <strong>apenas</strong> para consulta e
+            impressão por um período de 24 horas (Até a passagem do serviço
+            atual) no Menu "Serviço Anterior".
+          </p>
+        </div>
+        <div className="w-50 m-auto">
+          <button
+            type="button"
+            class="btn btn-danger w-100"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Armazenar Serviço
+          </button>
+          <Cancelar link="/" />
+        </div>
+      </div>
+    </>
   );
 }
