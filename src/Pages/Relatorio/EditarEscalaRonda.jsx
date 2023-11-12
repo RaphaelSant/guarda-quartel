@@ -96,7 +96,7 @@ export default function EditarEscalaRonda() {
             <div className="invalid-feedback">Campo obrigatório.</div>
           </div>
 
-          <button type="submit" className="btn btn-lg btn-success">
+          <button type="submit" className="btn btn-md btn-success">
             Atualizar Registro
           </button>
           <Voltar link="/relatorio/escalaDeRonda" />

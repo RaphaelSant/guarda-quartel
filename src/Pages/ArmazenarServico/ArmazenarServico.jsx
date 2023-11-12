@@ -468,7 +468,7 @@ export default function ArmazenarServico() {
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel">
-                Armazenar Serviço
+              <i class="fa-solid fa-triangle-exclamation"></i> Atenção! <i class="fa-solid fa-triangle-exclamation"></i>
               </h1>
               <button
                 type="button"
@@ -478,7 +478,7 @@ export default function ArmazenarServico() {
               ></button>
             </div>
             <div class="modal-body">
-              Os dados ficaram disponíveis apenas para consulta e impressão por
+              Os dados ficarão disponíveis apenas para consulta e impressão por
               um período de 24 horas (Até a passagem do serviço atual) no Menu
               "Serviço Anterior".
             </div>

@@ -188,7 +188,7 @@ export default function NovoDuranteExpediente() {
                         <div className="valid-feedback">OK!</div>
                         <div className="invalid-feedback">Campo obrigatório.</div>
                     </div>
-                    <button type="submit" className="btn btn-lg btn-success">
+                    <button type="submit" className="btn btn-md btn-success">
                         Registrar Militar
                     </button>
                     <Voltar link="/militares/duranteExpediente" />

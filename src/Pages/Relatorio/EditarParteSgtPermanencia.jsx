@@ -487,7 +487,7 @@ export default function EditarParteSgtPemanencia() {
 
 
 
-                    <button type="submit" className="btn btn-lg btn-success">
+                    <button type="submit" className="btn btn-md btn-success">
                         Atualizar Registro
                     </button>
                     <Voltar link="/relatorio/roteiroDaGuarda" />

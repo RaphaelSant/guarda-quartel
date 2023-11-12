@@ -28,12 +28,12 @@ export default function HomePage() {
             </div>
             <hr />
             <h3>Relatório</h3>
-            <div className="card-home mt-2">
+            <div className="card-home mt-2 mb-5">
                 <CardRelatorio link="/relatorio/roteiroDaGuarda" titulo="Roteiro da Guarda" />
                 <CardRelatorio link="/relatorio/escalaDeRonda" titulo="Escala de Ronda" />
                 <CardRelatorio link="/relatorio/parteSargentoPermanencia" titulo="Parte do Representante do Cmdo" />
                 <CardRelatorio link="/relatorio/armazenarServico" titulo="Armazenar Serviço" />
-                <CardRelatorio link="www.google.com" titulo="Serviço Anterior" />
+                <CardRelatorio link="/relatorio/servicoAnterior" titulo="Serviço Anterior" />
             </div>
         </div>
     </>

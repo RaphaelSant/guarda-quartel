@@ -28,6 +28,16 @@ import EditarRoteiroGuarda from "./Pages/Relatorio/EditarRoteiroDaGuarda";
 import ParteSargentoPermanencia from "./Pages/Relatorio/ParteSgtPermanencia";
 import EditarParteSgtPemanencia from "./Pages/Relatorio/EditarParteSgtPermanencia";
 import ArmazenarServico from "./Pages/ArmazenarServico/ArmazenarServico";
+import ServicoAnterior from "./Pages/ServicoAnterior/ServicoAnterior";
+import BkCivilRegistro from "./Pages/ServicoAnterior/Pages/BkCivilRegistro";
+import BkVeiculoCivil from "./Pages/ServicoAnterior/Pages/BkVeiculoCivil";
+import BkDuranteExpediente from "./Pages/ServicoAnterior/Pages/BkDuranteExpediente";
+import BkForaExpediente from "./Pages/ServicoAnterior/Pages/BkForaExpediente";
+import BkViaturasPelotao from "./Pages/ServicoAnterior/Pages/BkViaturasPelotao";
+import BkViaturasOutraOm from "./Pages/ServicoAnterior/Pages/BkViaturasOutraOm";
+import BkRoteiroDaGuarda from "./Pages/ServicoAnterior/Pages/BkRoteiroDaGuarda";
+import BkEscalaDeRonda from "./Pages/ServicoAnterior/Pages/BkEscalaDeRonda";
+import BkParteSgtPermanencia from "./Pages/ServicoAnterior/Pages/BkParteSgtPermanencia";
 
 
 export default function App() {
@@ -73,6 +83,19 @@ export default function App() {
 
         {/* CAMPO ARMAZENAGEM DE SERVIÇO */}
         <Route exact path="/relatorio/armazenarServico" Component={ArmazenarServico} />
+
+        {/* CAMPO SERVIÇO ANTERIOR */}
+        <Route exact path="/relatorio/servicoAnterior" Component={ServicoAnterior} />
+        <Route exact path="/relatorio/servicoAnterior/civilRegistro" Component={BkCivilRegistro} />
+        <Route exact path="/relatorio/servicoAnterior/veiculoCivil" Component={BkVeiculoCivil} />
+        <Route exact path="/relatorio/servicoAnterior/militaresDuranteExpediente" Component={BkDuranteExpediente} />
+        <Route exact path="/relatorio/servicoAnterior/militaresForaExpediente" Component={BkForaExpediente} />
+        <Route exact path="/relatorio/servicoAnterior/viaturasDoPelotao" Component={BkViaturasPelotao} />
+        <Route exact path="/relatorio/servicoAnterior/viaturasDeOutrasOms" Component={BkViaturasOutraOm} />
+        <Route exact path="/relatorio/servicoAnterior/roteiroDaGuarda" Component={BkRoteiroDaGuarda} />
+        <Route exact path="/relatorio/servicoAnterior/escalaDeRonda" Component={BkEscalaDeRonda} />
+        <Route exact path="/relatorio/servicoAnterior/parteSargentoPermanencia" Component={BkParteSgtPermanencia} />
+
 
       </Routes>
     </BrowserRouter>

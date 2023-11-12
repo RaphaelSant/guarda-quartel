@@ -248,7 +248,7 @@ export default function EditarForaExpediente() {
                         <div className="valid-feedback">OK!</div>
                         <div className="invalid-feedback">Campo obrigatório.</div>
                     </div>
-                    <button type="submit" className="btn btn-lg btn-success">
+                    <button type="submit" className="btn btn-md btn-success">
                         Atualizar Registro
                     </button>
                     <Voltar link="/militares/foraExpediente" />
