@@ -6,6 +6,7 @@ import {
     PaginaInicial,
 } from "../../Components/Button/Button";
 import Navbar from "../../Components/Navbar/Navbar";
+import "./estilo-print.css";
 
 /*FIREBASE CONFIG*/
 import iniciarFirestoreDb from "../FirestoreConfig/firestoreConfig";
@@ -106,8 +107,8 @@ export default function ParteSargentoPermanencia() {
                     titulo="Editar Parte"
                 />
             </div>
-            <div className="container border bg-white">
-                <table className="table text-center table-bordered table-hover d-none d-print-block">
+            <div className="container border bg-white container-local">
+                <table className="table text-center table-bordered table-hover d-none d-print-block table-local">
                     <thead>
                         <tr className="row">
                             <th scope="col" className="col-3">Subcomandante</th>
@@ -121,7 +122,7 @@ export default function ParteSargentoPermanencia() {
                         </tr>
                     </thead>
                 </table>
-                <div className="container">
+                <div className="container container-dados">
                     {parteSgtPemanencia.map((parteSgt) => {
                         return (
                             <div key={parteSgt.id}>
@@ -130,7 +131,7 @@ export default function ParteSargentoPermanencia() {
                                 <p className="my-1"><b>03 – Pessoal de Serviço:</b> {parteSgt.pessoalServico}</p>
                                 {militares.map((militares) => {
                                     return (
-                                        <table className="table table-bordered table-hover" key={militares.id}>
+                                        <table className="table table-bordered table-hover table-local" key={militares.id}>
                                             <tbody>
                                                 <tr>
                                                     <td><b>Cmt da Gda: </b>{militares.sgtNomeGuerra}</td>
@@ -146,7 +147,7 @@ export default function ParteSargentoPermanencia() {
                                     );
                                 })}
                                 <p  className="my-1"><b>04 - Energia Elétrica:</b></p>
-                                <table className="table text-center table-bordered table-hover">
+                                <table className="table text-center table-bordered table-hover table-local">
                                     <thead>
                                         <tr className="align-middle">
                                             <th>Leitura</th>

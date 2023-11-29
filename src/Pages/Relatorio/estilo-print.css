@@ -1,0 +1,15 @@
+@media print {
+    .container-local {
+        min-width: 210mm !important;
+        max-width: 210mm !important;
+    }
+
+    .container-dados {
+        min-width: none;
+        max-width: none;
+    }
+
+    .table-local {
+        width: 100%;
+    }
+}

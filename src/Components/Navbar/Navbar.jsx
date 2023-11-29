@@ -2,6 +2,7 @@ import React from "react";
 
 import logoNav from './assets/LogoNavbar.png';
 import { Link } from "react-router-dom";
+import Manual from "../Assets/Manual do Sistema Eletrônico de Registro de Acesso para Quartéis Militares.pdf";
 
 export default function Navbar() {
     return <nav className="navbar navbar-expand bg-body-tertiary shadow d-print-none">
@@ -12,7 +13,7 @@ export default function Navbar() {
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav ms-auto">
                     <li className="nav-item">
-                        <a target="_blank" className="nav-link" href="www.google.com">Sair</a>
+                        <a target="_blank" className="nav-link" href={Manual} rel="noreferrer"><i class="fa-solid fa-book"></i> Manual</a>
                     </li>
                 </ul>
             </div>
