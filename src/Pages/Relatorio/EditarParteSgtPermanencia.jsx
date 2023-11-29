@@ -490,7 +490,7 @@ export default function EditarParteSgtPemanencia() {
                     <button type="submit" className="btn btn-md btn-success">
                         Atualizar Registro
                     </button>
-                    <Voltar link="/relatorio/roteiroDaGuarda" />
+                    <Voltar link="/relatorio/parteSargentoPermanencia" />
                     <button type="button" className="btn btn-lg btn-secondary" onClick={alternarEdicao}>
                         {edicaoHabilitada ? "Bloquear Campos" : "Editar Campos"}
                     </button>
