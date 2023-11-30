@@ -7,6 +7,9 @@ import {
 } from "../../Components/Button/Button";
 import Navbar from "../../Components/Navbar/Navbar";
 
+/*CSS*/
+import estiloImpressao from "../CSS/PrintLandscape.module.css";
+
 /*FIREBASE CONFIG*/
 import iniciarFirestoreDb from "../FirestoreConfig/firestoreConfig";
 
@@ -65,7 +68,7 @@ export default function EscalaDeRonda() {
           titulo="Editar alterações"
         />
       </div>
-      <div className="container d-flex flex-column justify-content-center align-items-center">
+      <div className={`container d-flex flex-column justify-content-center align-items-center ${estiloImpressao.container_local}`}>
         <ImpressaoHeader titulo="ESCALA DE RONDA" />
 
         <table className="table text-center table-bordered table-hover">
@@ -136,7 +139,7 @@ export default function EscalaDeRonda() {
           <p></p>
         </div>
 
-        <Imprimir />
+        <Imprimir impressao="paisagem" />
         <ImpressaoFooter />
       </div>
     </>

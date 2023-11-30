@@ -7,6 +7,9 @@ import {
 } from "../../../../Components/Button/Button";
 import Navbar from "../../../../Components/Navbar/Navbar";
 
+/* CSS */
+import estiloImpressao from "../../../CSS/PrintLandscape.module.css";
+
 /*FIREBASE CONFIG*/
 import iniciarFirestoreDb from "../../../FirestoreConfig/firestoreConfig";
 
@@ -94,7 +97,7 @@ export default function DuranteExpediente() {
                 <PaginaInicial link="/" titulo="Página Inicial" />
                 <NovoRegistro link="/militares/duranteExpediente/novoRegistro" titulo="Novo Registro" />
             </div>
-            <div className="container d-flex flex-column justify-content-center align-items-center">
+            <div className={`container d-flex flex-column justify-content-center align-items-center ${estiloImpressao.container_local}`}>
                 <ImpressaoHeader titulo="ENTRADA E SAÍDA DE MILITARES DURANTE HORÁRIO DE EXPEDIENTE" />
 
                 <table className="table text-center table-bordered table-hover">
@@ -150,7 +153,7 @@ export default function DuranteExpediente() {
                         })}
                     </tbody>
                 </table>
-                <Imprimir />
+                <Imprimir impressao="paisagem"/>
                 <ImpressaoFooter />
             </div>
         </>

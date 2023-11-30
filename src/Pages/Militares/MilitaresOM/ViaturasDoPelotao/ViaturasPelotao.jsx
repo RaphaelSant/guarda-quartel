@@ -10,6 +10,9 @@ import Navbar from "../../../../Components/Navbar/Navbar";
 /*FIREBASE CONFIG*/
 import iniciarFirestoreDb from "../../../FirestoreConfig/firestoreConfig";
 
+/*CSS*/
+import estiloImpressao from "../../../CSS/PrintLandscape.module.css";
+
 import {
     collection,
     deleteDoc,
@@ -88,7 +91,7 @@ export default function ViaturasDoPelotao() {
                 <PaginaInicial link="/" titulo="Página Inicial" />
                 <NovoRegistro link="/militares/viaturasDoPelotao/novoRegistro" titulo="Novo Registro" />
             </div>
-            <div className="container d-flex flex-column justify-content-center align-items-center">
+            <div className={`container d-flex flex-column justify-content-center align-items-center ${estiloImpressao.container_local}`}>
                 <ImpressaoHeader titulo="ENTRADA E SAÍDA DE VIATURAS DO PELOTÃO" />
 
                 <table className="table text-center table-bordered table-hover">
@@ -150,7 +153,7 @@ export default function ViaturasDoPelotao() {
                     </tbody>
 
                 </table>
-                <Imprimir />
+                <Imprimir impressao="paisagem"/>
                 <ImpressaoFooter />
             </div>
         </>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Voltar } from "../../../Components/Button/Button";
 import Navbar from "../../../Components/Navbar/Navbar";
-import "./veiculoscivil.css";
 
 import { doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";

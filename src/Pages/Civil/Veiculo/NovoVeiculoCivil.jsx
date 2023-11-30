@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Voltar } from "../../../Components/Button/Button";
 import Navbar from "../../../Components/Navbar/Navbar";
-import "./veiculoscivil.css";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { capturaData, capturaHora } from "../../Assets/capturaDate";
 import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig";

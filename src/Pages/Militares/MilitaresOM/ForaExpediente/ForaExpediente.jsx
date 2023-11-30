@@ -10,6 +10,9 @@ import Navbar from "../../../../Components/Navbar/Navbar";
 /*FIREBASE CONFIG*/
 import iniciarFirestoreDb from "../../../FirestoreConfig/firestoreConfig";
 
+/*CSS*/
+import estiloImpressao from "../../../CSS/PrintLandscape.module.css";
+
 import {
     collection,
     deleteDoc,
@@ -94,7 +97,7 @@ export default function ForaExpediente() {
                 <PaginaInicial link="/" titulo="Página Inicial" />
                 <NovoRegistro link="/militares/foraExpediente/novoRegistro" titulo="Novo Registro" />
             </div>
-            <div className="container d-flex flex-column justify-content-center align-items-center">
+            <div className={`container d-flex flex-column justify-content-center align-items-center ${estiloImpressao.container_local}`}>
                 <ImpressaoHeader titulo="ENTRADA E SAÍDA DE MILITARES FORA DO HORÁRIO DE EXPEDIENTE" />
 
                 <table className="table text-center table-bordered table-hover">
@@ -150,7 +153,7 @@ export default function ForaExpediente() {
                         })}
                     </tbody>
                 </table>
-                <Imprimir />
+                <Imprimir impressao="paisagem"/>
                 <ImpressaoFooter />
             </div>
         </>

@@ -7,6 +7,9 @@ import {
 } from "../../../Components/Button/Button";
 import Navbar from "../../../Components/Navbar/Navbar";
 
+/*CSS*/
+import estiloImpressao from "../../CSS/PrintLandscape.module.css";
+
 /*FIREBASE CONFIG*/
 import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig";
 
@@ -86,7 +89,7 @@ export default function ViaturasOutraOm() {
                 <PaginaInicial link="/" titulo="Página Inicial" />
                 <NovoRegistro link="/militares/viaturasDeOutrasOms/novoRegistro" titulo="Novo Registro" />
             </div>
-            <div className="container d-flex flex-column justify-content-center align-items-center">
+            <div className={`container d-flex flex-column justify-content-center align-items-center ${estiloImpressao.container_local}`}>
                 <ImpressaoHeader titulo="ENTRADA E SAÍDA DE VIATURAS DE OUTROS QUARTÉIS" />
 
                 <table className="table text-center table-bordered table-hover">
@@ -143,7 +146,7 @@ export default function ViaturasOutraOm() {
                     </tbody>
 
                 </table>
-                <Imprimir />
+                <Imprimir impressao="paisagem"/>
                 <ImpressaoFooter />
             </div>
         </>

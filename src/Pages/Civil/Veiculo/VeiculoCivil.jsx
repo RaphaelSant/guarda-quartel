@@ -3,7 +3,10 @@ import { Imprimir, NovoRegistro, PaginaInicial } from "../../../Components/Butto
 import Navbar from "../../../Components/Navbar/Navbar";
 import { collection, deleteDoc, doc, getDocs, getFirestore, orderBy, query } from "firebase/firestore";
 import { Link } from "react-router-dom";
-import "./veiculoscivil.css";
+
+/* CSS */
+import estiloImpressao from "../../CSS/PrintPortrait.module.css";
+import "../../CSS/estiloTabela.css";
 
 import ImpressaoHeader from "../../../Components/Impressao/ImpressaoHeader";
 import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig";
@@ -77,7 +80,7 @@ export default function VeiculoCivil() {
             <PaginaInicial link="/" titulo="Página Inicial" />
             <NovoRegistro link="/civis/veiculoCivil/novoRegistro" titulo="Novo Registro" />
         </div>
-        <div className="container d-flex flex-column justify-content-center align-items-center">
+        <div className={`container d-flex flex-column justify-content-center align-items-center ${estiloImpressao.container_local}`}>
             <ImpressaoHeader titulo="Entrada e Saída de Veículos Civis" />
             <table className="table text-center table-bordered table-hover">
                 <thead>
@@ -128,7 +131,7 @@ export default function VeiculoCivil() {
                     })}
                 </tbody>
             </table>
-            <Imprimir />
+            <Imprimir impressao="retrato"/>
             <div className="d-none d-print-block text-center">
                 <p>Quartel em Porto Velho - RO, {dateHoje}.</p>
                 <div className="underline mt-5"></div>

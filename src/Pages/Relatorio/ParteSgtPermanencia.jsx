@@ -6,7 +6,9 @@ import {
     PaginaInicial,
 } from "../../Components/Button/Button";
 import Navbar from "../../Components/Navbar/Navbar";
-import "./estilo-print.css";
+
+/*CSS*/
+import estiloImpressao from "../CSS/PrintPortrait.module.css";
 
 /*FIREBASE CONFIG*/
 import iniciarFirestoreDb from "../FirestoreConfig/firestoreConfig";
@@ -107,8 +109,8 @@ export default function ParteSargentoPermanencia() {
                     titulo="Editar Parte"
                 />
             </div>
-            <div className="container border bg-white container-local">
-                <table className="table text-center table-bordered table-hover d-none d-print-block table-local">
+            <div className={`container border bg-white ${estiloImpressao.container_local}`}>
+                <table className="table text-center table-bordered table-hover d-none d-print-block">
                     <thead>
                         <tr className="row">
                             <th scope="col" className="col-3">Subcomandante</th>
@@ -122,7 +124,7 @@ export default function ParteSargentoPermanencia() {
                         </tr>
                     </thead>
                 </table>
-                <div className="container container-dados">
+                <div>
                     {parteSgtPemanencia.map((parteSgt) => {
                         return (
                             <div key={parteSgt.id}>

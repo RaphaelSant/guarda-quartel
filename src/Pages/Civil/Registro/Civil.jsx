@@ -6,7 +6,9 @@ import {
   PaginaInicial,
 } from "../../../Components/Button/Button";
 import Navbar from "../../../Components/Navbar/Navbar";
-import "./novocivil.css";
+/* CSS */
+import estiloImpressao from "../../CSS/PrintPortrait.module.css";
+import "../../CSS/estiloTabela.css";
 
 /*FIREBASE CONFIG*/
 import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig";
@@ -95,7 +97,7 @@ export default function RegistroCivil() {
         <PaginaInicial link="/" titulo="Página Inicial" />
         <NovoRegistro link="/civis/civil/novoRegistro" titulo="Novo Registro" />
       </div>
-      <div className="container d-flex flex-column justify-content-center align-items-center">
+      <div className={`container d-flex flex-column justify-content-center align-items-center ${estiloImpressao.container_local}`}>
         <ImpressaoHeader titulo="Entrada e Saída de Civis" />
 
         <table className="table text-center table-bordered table-hover">
@@ -147,7 +149,7 @@ export default function RegistroCivil() {
             })}
           </tbody>
         </table>
-        <Imprimir />
+        <Imprimir impressao="retrato"/>
         <ImpressaoFooter />
       </div>
     </>

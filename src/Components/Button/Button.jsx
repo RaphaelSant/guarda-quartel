@@ -37,12 +37,32 @@ export function Cancelar(props) {
 }
 
 export function Imprimir(props) {
+  const tipo = props.impressao;
+  function teste(tipo) {
+    if (tipo === 'paisagem') {
+      return (
+        <div class="alert alert-primary mt-2 d-print-none" role="alert">
+          Recomenda-se imprimir esta pagina em paisagem.
+        </div>
+      );
+    } else {
+      return (
+      <div class="alert alert-primary mt-2 d-print-none" role="alert">
+        Recomenda-se imprimir esta pagina em retrato.
+      </div>);
+    }
+  }
+
   return (
-    <button
-      className={`btn btn-md btn-primary d-print-none ${props.classe}`}
-      onClick={() => window.print()}
-    >
-      <i className="fa-solid fa-print me-2"></i>Imprimir
-    </button>
+    <>
+      <button
+        className={`btn btn-md btn-primary d-print-none ${props.classe}`}
+        onClick={() => window.print()}
+      >
+        <i className="fa-solid fa-print me-2"></i>Imprimir
+      </button>
+      {teste(tipo)}
+    </>
+
   );
 }
