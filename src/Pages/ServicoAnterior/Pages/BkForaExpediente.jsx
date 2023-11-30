@@ -5,6 +5,9 @@ import {
 } from "../../../Components/Button/Button";
 import Navbar from "../../../Components/Navbar/Navbar";
 
+/*CSS*/
+import estiloImpressao from "../../CSS/PrintLandscape.module.css";
+
 /*FIREBASE CONFIG*/
 import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig";
 
@@ -63,9 +66,8 @@ export default function BkForaExpediente() {
             <p className="text-center d-print-none">ENTRADA E SAÍDA DE MILITARES FORA DO HORÁRIO DE EXPEDIENTE</p>
             <div className="text-center mb-4 d-print-none">
                 <PaginaInicial link="/relatorio/servicoAnterior/" titulo="Voltar" />
-                <Imprimir />
             </div>
-            <div className="container d-flex flex-column justify-content-center align-items-center">
+            <div className={`container d-flex flex-column justify-content-center align-items-center ${estiloImpressao.container_local}`}>
                 <ImpressaoHeader titulo="ENTRADA E SAÍDA DE MILITARES FORA DO HORÁRIO DE EXPEDIENTE" />
 
                 <table className="table text-center table-bordered table-hover">
@@ -100,6 +102,9 @@ export default function BkForaExpediente() {
                 </table>
 
                 <ImpressaoFooter />
+            </div>
+            <div className="d-flex flex-column justify-content-center align-items-center d-print-none">
+                <Imprimir />
             </div>
         </>
     );

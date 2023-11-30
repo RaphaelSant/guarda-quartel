@@ -5,6 +5,9 @@ import {
 } from "../../../Components/Button/Button";
 import Navbar from "../../../Components/Navbar/Navbar";
 
+/*CSS*/
+import estiloImpressao from "../../CSS/PrintPortrait.module.css";
+
 /*FIREBASE CONFIG*/
 import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig";
 
@@ -94,9 +97,8 @@ export default function BkParteSgtPermanencia() {
             <p className="text-center d-print-none">PARTE DO SARGENTO PERMANÊNCIA</p>
             <div className="text-center mb-4 d-print-none">
                 <PaginaInicial link="/relatorio/servicoAnterior/" titulo="Voltar" />
-                <Imprimir />
             </div>
-            <div className="container border bg-white">
+            <div className={`container border bg-white ${estiloImpressao.container_local}`}>
                 <table className="table text-center table-bordered table-hover d-none d-print-block">
                     <thead>
                         <tr className="row">
@@ -111,7 +113,7 @@ export default function BkParteSgtPermanencia() {
                         </tr>
                     </thead>
                 </table>
-                <div className="container">
+                <div>
                     {parteSgtPemanencia.map((parteSgt) => {
                         return (
                             <div key={parteSgt.id}>
@@ -188,6 +190,9 @@ export default function BkParteSgtPermanencia() {
                 <div className="d-flex flex-column justify-content-center align-items-center">
                     <ImpressaoFooter />
                 </div>
+            </div>
+            <div className="mt-2 d-flex flex-column justify-content-center align-items-center d-print-none">
+                <Imprimir />
             </div>
         </>
     );

@@ -6,6 +6,9 @@ import { collection, getDocs, getFirestore, orderBy, query } from "firebase/fire
 import ImpressaoHeader from "../../../Components/Impressao/ImpressaoHeader";
 import iniciarFirestoreDb from "../../FirestoreConfig/firestoreConfig";
 
+/*CSS*/
+import estiloImpressao from "../../CSS/PrintPortrait.module.css";
+
 
 export default function BkVeiculoCivil() {
 
@@ -50,9 +53,8 @@ export default function BkVeiculoCivil() {
         <p className="text-center d-print-none">Entrada e Saída de Veículos Civis</p>
         <div className="text-center mb-4 d-print-none">
             <PaginaInicial link="/relatorio/servicoAnterior/" titulo="Voltar" />
-            <Imprimir />
         </div>
-        <div className="container d-flex flex-column justify-content-center align-items-center">
+        <div className={`container d-flex flex-column justify-content-center align-items-center ${estiloImpressao.container_local}`}>
             <ImpressaoHeader titulo="Entrada e Saída de Veículos Civis" />
             <table className="table text-center table-bordered table-hover">
                 <thead>
@@ -88,5 +90,8 @@ export default function BkVeiculoCivil() {
                 <p>Permanência 17º Pel Com Sl</p>
             </div>
         </div >
+        <div className="d-flex flex-column justify-content-center align-items-center d-print-none">
+            <Imprimir />
+        </div>
     </>
 }
