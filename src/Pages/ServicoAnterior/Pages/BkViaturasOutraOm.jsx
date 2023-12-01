@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
     Imprimir,
-    PaginaInicial,
+    Voltar,
 } from "../../../Components/Button/Button";
 import Navbar from "../../../Components/Navbar/Navbar";
 
@@ -58,7 +58,7 @@ export default function BkViaturasOutraOm() {
             </h5>
             <p className="text-center d-print-none">ENTRADA E SAÍDA DE VIATURAS DE OUTROS QUARTÉIS</p>
             <div className="text-center mb-4 d-print-none">
-                <PaginaInicial link="/relatorio/servicoAnterior/" titulo="Voltar" />
+                <Voltar link="/relatorio/servicoAnterior/" />
             </div>
             <div className={`container d-flex flex-column justify-content-center align-items-center ${estiloImpressao.container_local}`}>
                 <ImpressaoHeader titulo="ENTRADA E SAÍDA DE VIATURAS DE OUTROS QUARTÉIS" />

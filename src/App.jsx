@@ -38,13 +38,16 @@ import BkViaturasOutraOm from "./Pages/ServicoAnterior/Pages/BkViaturasOutraOm";
 import BkRoteiroDaGuarda from "./Pages/ServicoAnterior/Pages/BkRoteiroDaGuarda";
 import BkEscalaDeRonda from "./Pages/ServicoAnterior/Pages/BkEscalaDeRonda";
 import BkParteSgtPermanencia from "./Pages/ServicoAnterior/Pages/BkParteSgtPermanencia";
+import Login from "./Pages/Login/Login";
 
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" Component={HomePage} />
+        <Route exact path="/" Component={Login} />
+
+        <Route exact path="/homePage" Component={HomePage} />
 
         {/* CAMPOS CIVIL */}
         <Route exact path="/civis/civil" Component={Civil} />

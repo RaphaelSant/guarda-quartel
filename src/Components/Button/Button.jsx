@@ -13,7 +13,7 @@ export function NovoRegistro(props) {
 
 export function PaginaInicial(props) {
   return (
-    <Link to={props.link} className={`btn bnt-base btn-md paginaIncial me-2 ${props.estilo}`}>
+    <Link to="/homePage" className={`btn bnt-base btn-md paginaIncial me-2 ${props.estilo}`}>
       <i className="fa-solid fa-house me-2"></i>
       {props.titulo}
     </Link>
@@ -22,8 +22,8 @@ export function PaginaInicial(props) {
 
 export function Voltar(props) {
   return (
-    <Link to={props.link} className="btn btn-danger btn-md">
-      Voltar
+    <Link to={props.link} className="btn btn-secondary btn-md">
+      <i class="fa-solid fa-arrow-left"></i> Voltar
     </Link>
   );
 }

@@ -527,7 +527,7 @@ export default function ArmazenarServico() {
           >
             Armazenar Serviço
           </button>
-          <Cancelar link="/" />
+          <Cancelar link="/homePage" />
         </div>
       </div>
     </>
