@@ -27,9 +27,9 @@ export default function Navbar() {
             </Link>
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav ms-auto">
-                    <li className="nav-item">
+                    <li className="nav-item d-flex">
                         <a target="_blank" className="nav-link" href={Manual} rel="noreferrer"><i className="fa-solid fa-book"></i> Manual</a>
-                        <button className="btn" onClick={LogOut}>Sair</button>
+                        <button className="btn" onClick={LogOut}><i class="fa-solid fa-power-off"></i> Sair</button>
                     </li>
                 </ul>
             </div>

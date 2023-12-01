@@ -8,6 +8,8 @@ import logo from "../../Components/Assets/Logo.png";
 import estilo from "./Login.module.css";
 
 export default function Login() {
+  let mensagemDeErro = "";
+  let mensagemDeSucesso = "";
   const app = iniciarFirestoreDb();
   const auth = getAuth(app);
 
@@ -15,32 +17,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
-
-  /*
-  function fazLogin() {
-    return signInWithEmailAndPassword(email, password)
-      .then((response) => {
-        console.log(user);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  async function handleSignIn(e) {
-    e.preventDefault();
-
-    try {
-      await fazLogin();
-
-      if (user) {
-        window.location.href = "/homePage";
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  */
 
   async function handleSignIn(e) {
     e.preventDefault();
@@ -61,15 +37,16 @@ export default function Login() {
   }
 
   if (error) {
-    console.log(error.message);
+    mensagemDeErro =
+      "Ocorreu um erro ao fazer login. Por favor, verifique suas credenciais e tente novamente.";
   }
   if (user) {
-    console.log(user);
+    mensagemDeSucesso = "Login realizado! Redirecionando...";
   }
-
   if (loading) {
     //console.log(loading);
   }
+
   return (
     <>
       <div
@@ -78,7 +55,7 @@ export default function Login() {
         <h1 className="mb-3">Sistema de Registro Eletrônico</h1>
         <img src={logo} alt="Logo Pel Com" className={estilo.logo_login} />
         <p className="mt-1">17° Pelotão de Comunicações de Selva</p>
-        <form>
+        <form className={estilo.formulario_login}>
           <div>
             <label htmlFor="email">E-mail</label>
             <input
@@ -102,8 +79,10 @@ export default function Login() {
             />
           </div>
           <button className="btn btn-success w-100" onClick={handleSignIn}>
-            Entrar
+            {loading ? "Carregando..." : "Entrar"}
           </button>
+          {error && <p className="text-danger mt-3">{mensagemDeErro}</p>}
+          {user && <p className="text-success mt-3">{mensagemDeSucesso}</p>}
         </form>
       </div>
     </>
