@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 /* Páginas */
@@ -40,66 +40,94 @@ import BkEscalaDeRonda from "./Pages/ServicoAnterior/Pages/BkEscalaDeRonda";
 import BkParteSgtPermanencia from "./Pages/ServicoAnterior/Pages/BkParteSgtPermanencia";
 import Login from "./Pages/Login/Login";
 
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import iniciarFirestoreDb from "./Pages/FirestoreConfig/firestoreConfig.jsx";
 
 export default function App() {
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const app = iniciarFirestoreDb(); // Inicie o Firestore
+    const auth = getAuth(app); // Obtenha a instância de autenticação
+
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser); // Define o usuário no estado conforme o estado de autenticação muda
+    });
+
+    return () => unsubscribe(); // Para de ouvir as mudanças no estado de autenticação quando o componente é desmontado
+  }, []);
+
+  console.log(user);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route exact path="/" Component={Login} />
 
-        <Route exact path="/homePage" Component={HomePage} />
+        {/* Exibir a página Home somente se o usuário estiver autenticado */}
+        {user ? (
+          <Route exact path="/homePage" Component={HomePage} />
+        ) : (
+          // Redirecionar para a página de Login se o usuário não estiver autenticado
+          <Route path="/homePage" Component={Login} />
+        )}
 
-        {/* CAMPOS CIVIL */}
-        <Route exact path="/civis/civil" Component={Civil} />
-        <Route exact path="/civis/civil/novoRegistro" Component={NovoCivil} />
-        <Route exact path="/civis/civil/editarRegistro/:id" Component={EditarRegistroCivil} />
         
-        <Route exact path="/civis/veiculoCivil" Component={VeiculoCivil} />
-        <Route exact path="/civis/veiculoCivil/novoRegistro" Component={NovoVeiculoCivil} />
-        <Route exact path="/civis/veiculoCivil/editarRegistro/:id" Component={EditarVeiculoCivil} />
 
-        {/* CAMPOS MILITARES DA OM */}
-        <Route exact path="/militares/duranteExpediente" Component={DuranteExpediente} />
-        <Route exact path="/militares/duranteExpediente/novoRegistro" Component={NovoDuranteExpediente} />
-        <Route exact path="/militares/duranteExpediente/editarRegistro/:id" Component={EditarDuranteExpediente} />
+        {user && (
+          <>
+            {/* CAMPOS CIVIL */}
+            <Route exact path="/civis/civil" Component={Civil} />
+            <Route exact path="/civis/civil/novoRegistro" Component={NovoCivil} />
+            <Route exact path="/civis/civil/editarRegistro/:id" Component={EditarRegistroCivil} />
 
-        <Route exact path="/militares/foraExpediente" Component={ForaExpediente} />
-        <Route exact path="/militares/foraExpediente/novoRegistro" Component={NovoForaExpediente} />
-        <Route exact path="/militares/foraExpediente/editarRegistro/:id" Component={EditarForaExpediente} />
+            <Route exact path="/civis/veiculoCivil" Component={VeiculoCivil} />
+            <Route exact path="/civis/veiculoCivil/novoRegistro" Component={NovoVeiculoCivil} />
+            <Route exact path="/civis/veiculoCivil/editarRegistro/:id" Component={EditarVeiculoCivil} />
 
-        <Route exact path="/militares/viaturasDoPelotao" Component={ViaturasDoPelotao} />
-        <Route exact path="/militares/viaturasDoPelotao/novoRegistro" Component={NovoViaturasPelotao} />
-        <Route exact path="/militares/viaturasDoPelotao/editarRegistro/:id" Component={EditarViaturasPelotao} />
+            {/* CAMPOS MILITARES DA OM */}
+            <Route exact path="/militares/duranteExpediente" Component={DuranteExpediente} />
+            <Route exact path="/militares/duranteExpediente/novoRegistro" Component={NovoDuranteExpediente} />
+            <Route exact path="/militares/duranteExpediente/editarRegistro/:id" Component={EditarDuranteExpediente} />
 
-        {/* CAMPOS MILITARES DE OUTRAS OMs */}
-        <Route exact path="/militares/viaturasDeOutrasOms" Component={ViaturasOutraOm} />
-        <Route exact path="/militares/viaturasDeOutrasOms/novoRegistro" Component={NovoViaturasOutraOm} />
-        <Route exact path="/militares/viaturasDeOutrasOms/editarRegistro/:id" Component={EditarViaturasOutraOm} />
+            <Route exact path="/militares/foraExpediente" Component={ForaExpediente} />
+            <Route exact path="/militares/foraExpediente/novoRegistro" Component={NovoForaExpediente} />
+            <Route exact path="/militares/foraExpediente/editarRegistro/:id" Component={EditarForaExpediente} />
 
-        {/* CAMPOS DE RELATÓRIO DA OM */}
-        <Route exact path="/relatorio/roteiroDaGuarda" Component={RoteiroDaGuarda} />
-        <Route exact path="/relatorio/roteiroDaGuarda/editarRoteiroGuarda/:id" Component={EditarRoteiroGuarda} />
-        <Route exact path="/relatorio/escalaDeRonda" Component={EscalaDeRonda} />
-        <Route exact path="/relatorio/escalaDeRonda/editarEscalaRonda/:id" Component={EditarEscalaRonda} />
-        <Route exact path="/relatorio/parteSargentoPermanencia" Component={ParteSargentoPermanencia} />
-        <Route exact path="/relatorio/parteSargentoPermanencia/editarParte/:id" Component={EditarParteSgtPemanencia} />
+            <Route exact path="/militares/viaturasDoPelotao" Component={ViaturasDoPelotao} />
+            <Route exact path="/militares/viaturasDoPelotao/novoRegistro" Component={NovoViaturasPelotao} />
+            <Route exact path="/militares/viaturasDoPelotao/editarRegistro/:id" Component={EditarViaturasPelotao} />
 
-        {/* CAMPO ARMAZENAGEM DE SERVIÇO */}
-        <Route exact path="/relatorio/armazenarServico" Component={ArmazenarServico} />
+            {/* CAMPOS MILITARES DE OUTRAS OMs */}
+            <Route exact path="/militares/viaturasDeOutrasOms" Component={ViaturasOutraOm} />
+            <Route exact path="/militares/viaturasDeOutrasOms/novoRegistro" Component={NovoViaturasOutraOm} />
+            <Route exact path="/militares/viaturasDeOutrasOms/editarRegistro/:id" Component={EditarViaturasOutraOm} />
 
-        {/* CAMPO SERVIÇO ANTERIOR */}
-        <Route exact path="/relatorio/servicoAnterior" Component={ServicoAnterior} />
-        <Route exact path="/relatorio/servicoAnterior/civilRegistro" Component={BkCivilRegistro} />
-        <Route exact path="/relatorio/servicoAnterior/veiculoCivil" Component={BkVeiculoCivil} />
-        <Route exact path="/relatorio/servicoAnterior/militaresDuranteExpediente" Component={BkDuranteExpediente} />
-        <Route exact path="/relatorio/servicoAnterior/militaresForaExpediente" Component={BkForaExpediente} />
-        <Route exact path="/relatorio/servicoAnterior/viaturasDoPelotao" Component={BkViaturasPelotao} />
-        <Route exact path="/relatorio/servicoAnterior/viaturasDeOutrasOms" Component={BkViaturasOutraOm} />
-        <Route exact path="/relatorio/servicoAnterior/roteiroDaGuarda" Component={BkRoteiroDaGuarda} />
-        <Route exact path="/relatorio/servicoAnterior/escalaDeRonda" Component={BkEscalaDeRonda} />
-        <Route exact path="/relatorio/servicoAnterior/parteSargentoPermanencia" Component={BkParteSgtPermanencia} />
+            {/* CAMPOS DE RELATÓRIO DA OM */}
+            <Route exact path="/relatorio/roteiroDaGuarda" Component={RoteiroDaGuarda} />
+            <Route exact path="/relatorio/roteiroDaGuarda/editarRoteiroGuarda/:id" Component={EditarRoteiroGuarda} />
+            <Route exact path="/relatorio/escalaDeRonda" Component={EscalaDeRonda} />
+            <Route exact path="/relatorio/escalaDeRonda/editarEscalaRonda/:id" Component={EditarEscalaRonda} />
+            <Route exact path="/relatorio/parteSargentoPermanencia" Component={ParteSargentoPermanencia} />
+            <Route exact path="/relatorio/parteSargentoPermanencia/editarParte/:id" Component={EditarParteSgtPemanencia} />
 
+            {/* CAMPO ARMAZENAGEM DE SERVIÇO */}
+            <Route exact path="/relatorio/armazenarServico" Component={ArmazenarServico} />
 
+            {/* CAMPO SERVIÇO ANTERIOR */}
+            <Route exact path="/relatorio/servicoAnterior" Component={ServicoAnterior} />
+            <Route exact path="/relatorio/servicoAnterior/civilRegistro" Component={BkCivilRegistro} />
+            <Route exact path="/relatorio/servicoAnterior/veiculoCivil" Component={BkVeiculoCivil} />
+            <Route exact path="/relatorio/servicoAnterior/militaresDuranteExpediente" Component={BkDuranteExpediente} />
+            <Route exact path="/relatorio/servicoAnterior/militaresForaExpediente" Component={BkForaExpediente} />
+            <Route exact path="/relatorio/servicoAnterior/viaturasDoPelotao" Component={BkViaturasPelotao} />
+            <Route exact path="/relatorio/servicoAnterior/viaturasDeOutrasOms" Component={BkViaturasOutraOm} />
+            <Route exact path="/relatorio/servicoAnterior/roteiroDaGuarda" Component={BkRoteiroDaGuarda} />
+            <Route exact path="/relatorio/servicoAnterior/escalaDeRonda" Component={BkEscalaDeRonda} />
+            <Route exact path="/relatorio/servicoAnterior/parteSargentoPermanencia" Component={BkParteSgtPermanencia} />
+          </>
+        )}
       </Routes>
     </BrowserRouter>
   );

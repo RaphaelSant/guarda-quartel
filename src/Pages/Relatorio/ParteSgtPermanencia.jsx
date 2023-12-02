@@ -109,8 +109,8 @@ export default function ParteSargentoPermanencia() {
                     titulo="Editar Parte"
                 />
             </div>
-            <div className={`container border bg-white ${estiloImpressao.container_local}`}>
-                <table className="table text-center table-bordered table-hover d-none d-print-block">
+            <div className={`container border border-dark-subtle bg-white ${estiloImpressao.container_local}`}>
+                <table className="table text-center table-bordered border-dark-subtle table-hover d-none d-print-block">
                     <thead>
                         <tr className="row">
                             <th scope="col" className="col-3">Subcomandante</th>
@@ -133,7 +133,7 @@ export default function ParteSargentoPermanencia() {
                                 <p className="my-1"><b>03 – Pessoal de Serviço:</b> {parteSgt.pessoalServico}</p>
                                 {militares.map((militares) => {
                                     return (
-                                        <table className="table table-bordered table-hover table-local" key={militares.id}>
+                                        <table className="table table-bordered border-dark-subtle table-hover table-local" key={militares.id}>
                                             <tbody>
                                                 <tr>
                                                     <td><b>Cmt da Gda: </b>{militares.sgtNomeGuerra}</td>
@@ -149,7 +149,7 @@ export default function ParteSargentoPermanencia() {
                                     );
                                 })}
                                 <p  className="my-1"><b>04 - Energia Elétrica:</b></p>
-                                <table className="table text-center table-bordered table-hover table-local">
+                                <table className="table text-center table-bordered border-dark-subtle table-hover table-local">
                                     <thead>
                                         <tr className="align-middle">
                                             <th>Leitura</th>

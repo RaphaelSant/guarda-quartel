@@ -1,4 +1,5 @@
 import React from "react";
+import "./impressao.css";
 
 export default function ImpressaoFooter() {
     // Capturando a data do sistema
@@ -7,7 +8,7 @@ export default function ImpressaoFooter() {
     return (
         <div className="d-none d-print-block text-center">
             <p>Quartel em Porto Velho - RO, {dataHoje}.</p>
-            <div className="underline mt-5"></div>
+            <div className="underline impressao_margem"></div>
             <p>Permanência 17º Pel Com Sl</p>
         </div>
     );

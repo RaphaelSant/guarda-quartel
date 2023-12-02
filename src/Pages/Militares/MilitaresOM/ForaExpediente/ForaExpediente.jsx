@@ -100,7 +100,7 @@ export default function ForaExpediente() {
             <div className={`container d-flex flex-column justify-content-center align-items-center ${estiloImpressao.container_local}`}>
                 <ImpressaoHeader titulo="ENTRADA E SAÍDA DE MILITARES FORA DO HORÁRIO DE EXPEDIENTE" />
 
-                <table className="table text-center table-bordered table-hover">
+                <table className="table text-center table-bordered border-dark-subtle table-hover">
                     <thead>
                         <tr>
                             <th scope="col">PG</th>

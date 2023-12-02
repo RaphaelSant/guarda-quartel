@@ -23,7 +23,7 @@ export function PaginaInicial(props) {
 export function Voltar(props) {
   return (
     <Link to={props.link} className="btn btn-secondary btn-md">
-      <i class="fa-solid fa-arrow-left"></i> Voltar
+      <i className="fa-solid fa-arrow-left"></i> Voltar
     </Link>
   );
 }
@@ -41,13 +41,13 @@ export function Imprimir(props) {
   function teste(tipo) {
     if (tipo === 'paisagem') {
       return (
-        <div class="alert alert-primary mt-2 d-print-none" role="alert">
+        <div className="alert alert-primary mt-2 d-print-none" role="alert">
           Recomenda-se imprimir esta pagina em paisagem.
         </div>
       );
     } else {
       return (
-      <div class="alert alert-primary mt-2 d-print-none" role="alert">
+      <div className="alert alert-primary mt-2 d-print-none" role="alert">
         Recomenda-se imprimir esta pagina em retrato.
       </div>);
     }

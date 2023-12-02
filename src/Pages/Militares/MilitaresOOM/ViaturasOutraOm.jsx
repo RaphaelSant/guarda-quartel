@@ -92,7 +92,7 @@ export default function ViaturasOutraOm() {
             <div className={`container d-flex flex-column justify-content-center align-items-center ${estiloImpressao.container_local}`}>
                 <ImpressaoHeader titulo="ENTRADA E SAÍDA DE VIATURAS DE OUTROS QUARTÉIS" />
 
-                <table className="table text-center table-bordered table-hover">
+                <table className="table text-center table-bordered border-dark-subtle table-hover">
                     <thead>
                         <tr className="align-middle">
                             <th scope="col" rowSpan={'2'}>Vtr - OM</th>

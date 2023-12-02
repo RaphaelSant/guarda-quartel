@@ -73,7 +73,7 @@ export default function RoteiroDaGuarda() {
       <div className={`container d-flex flex-column justify-content-center align-items-center ${estiloImpressao.container_local}`}>
         <ImpressaoHeader titulo="ROTEIRO DA GUARDA" />
 
-        <table className="table text-center table-bordered table-hover">
+        <table className="table text-center table-bordered border-dark-subtle table-hover">
           <thead>
             <tr className="align-middle">
               <th scope="col">Grad</th>
@@ -93,7 +93,7 @@ export default function RoteiroDaGuarda() {
                   <td>{militar.sgtTipoArmto}</td>
                   <td>{militar.sgtNrArmto}</td>
                   <td>{militar.sgtQtdMun}</td>
-                  <td className="fw-bold">Cb Gda</td>
+                  <td className="fw-bold">Cmt Gda</td>
                 </tr>
               );
             })}
@@ -105,7 +105,7 @@ export default function RoteiroDaGuarda() {
                   <td>{militar.cbTipoArmto}</td>
                   <td>{militar.cbNrArmto}</td>
                   <td>{militar.cbQtdMun}</td>
-                  <td className="fw-bold">Mot Dia</td>
+                  <td className="fw-bold">Cb Gda</td>
                 </tr>
               );
             })}
@@ -117,7 +117,7 @@ export default function RoteiroDaGuarda() {
                   <td>{militar.sdTipoArmto}</td>
                   <td>{militar.sdNrArmto}</td>
                   <td>{militar.sdQtdMun}</td>
-                  <td className="fw-bold">Cmt Gda</td>
+                  <td className="fw-bold">Mot Dia</td>
                 </tr>
               );
             })}
@@ -127,7 +127,7 @@ export default function RoteiroDaGuarda() {
           <b>ROTEIRO DE RODÍZIO DA GUARDA</b>
         </p>
 
-        <table className="table text-center table-bordered table-hover">
+        <table className="table text-center table-bordered border-dark-subtle table-hover">
           <thead>
             <tr className="align-middle">
               <th scope="col">Horários</th>

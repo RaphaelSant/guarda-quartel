@@ -71,7 +71,7 @@ export default function EscalaDeRonda() {
       <div className={`container d-flex flex-column justify-content-center align-items-center ${estiloImpressao.container_local}`}>
         <ImpressaoHeader titulo="ESCALA DE RONDA" />
 
-        <table className="table text-center table-bordered table-hover">
+        <table className="table text-center table-bordered border-dark-subtle table-hover">
           <thead>
             <tr className="align-middle">
               <th scope="col">Horário</th>
