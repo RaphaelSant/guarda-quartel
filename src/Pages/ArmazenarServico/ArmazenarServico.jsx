@@ -442,7 +442,7 @@ export default function ArmazenarServico() {
     }
   }
 
-  const handleArmazenarServico = async () => {
+  async function handleArmazenarServico() {
     await bkESCivis();
     await bkESVeiculosCivis();
     await bkESMilDuranteExpediente();
@@ -451,48 +451,50 @@ export default function ArmazenarServico() {
     await bkVtrOutraOm();
     await bkRoteiroGuarda();
     await bkParteSgtPerm();
+    
     alert("Armazenagem do Serviço Realizada!");
-    window.location.href = "/";
-  };
+    window.location.href = "/homePage";
+  }
 
   return (
     <>
       <div
-        class="modal fade"
+        className="modal fade"
         id="exampleModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
-              <i class="fa-solid fa-triangle-exclamation"></i> Atenção! <i class="fa-solid fa-triangle-exclamation"></i>
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">
+                <i className="fa-solid fa-triangle-exclamation"></i> Atenção!{" "}
+                <i className="fa-solid fa-triangle-exclamation"></i>
               </h1>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               Os dados ficarão disponíveis apenas para consulta e impressão por
               um período de 24 horas (Até a passagem do serviço atual) no Menu
               "Serviço Anterior".
             </div>
-            <div class="modal-footer">
+            <div className="modal-footer">
               <button
                 type="button"
-                class="btn btn-secondary"
+                className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
                 Fechar
               </button>
               <button
                 type="button"
-                class="btn btn-danger"
+                className="btn btn-danger"
                 onClick={handleArmazenarServico}
               >
                 Armazenar Serviço
@@ -521,7 +523,7 @@ export default function ArmazenarServico() {
         <div className="w-50 m-auto">
           <button
             type="button"
-            class="btn btn-danger w-100"
+            className="btn btn-danger w-100"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >
