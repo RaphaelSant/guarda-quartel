@@ -381,7 +381,7 @@ export default function EditarParteSgtPemanencia() {
                             placeholder="12 – Rádios"
                             id="radios"
                             value={radios}
-                            onChange={(e) => setRevistaRecolher(e.target.value)}
+                            onChange={(e) => setRadios(e.target.value)}
                             disabled={!edicaoHabilitada}
                         />
                         <div className="valid-feedback">OK!</div>
