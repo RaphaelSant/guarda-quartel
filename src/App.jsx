@@ -45,18 +45,18 @@ import iniciarFirestoreDb from "./Pages/FirestoreConfig/firestoreConfig.jsx";
 
 export default function App() {
 
-  const [user, setUser] = useState(null);
-
   useEffect(() => {
     const app = iniciarFirestoreDb(); // Inicie o Firestore
     const auth = getAuth(app); // Obtenha a instância de autenticação
-
+    
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser); // Define o usuário no estado conforme o estado de autenticação muda
     });
-
+    
     return () => unsubscribe(); // Para de ouvir as mudanças no estado de autenticação quando o componente é desmontado
   }, []);
+  
+  const [user, setUser] = useState(true);
 
   console.log(user);
 

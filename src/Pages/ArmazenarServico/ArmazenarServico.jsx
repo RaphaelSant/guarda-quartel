@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import iniciarFirestoreDb from "../FirestoreConfig/firestoreConfig";
 import {
   addDoc,
@@ -11,6 +11,9 @@ import { Cancelar } from "../../Components/Button/Button";
 import Navbar from "../../Components/Navbar/Navbar";
 
 export default function ArmazenarServico() {
+  const [progresso, setProgresso] = useState(false);
+  const [concluido, setConcluido] = useState(false);
+
   iniciarFirestoreDb();
   const db = getFirestore();
 
@@ -443,17 +446,31 @@ export default function ArmazenarServico() {
   }
 
   async function handleArmazenarServico() {
-    await bkESCivis();
-    await bkESVeiculosCivis();
-    await bkESMilDuranteExpediente();
-    await bkESMilForaExpediente();
-    await bkESVtrPelotao();
-    await bkVtrOutraOm();
-    await bkRoteiroGuarda();
-    await bkParteSgtPerm();
-    
-    alert("Armazenagem do Serviço Realizada!");
-    window.location.href = "/homePage";
+    setProgresso(true);
+
+    try {
+      // Executar as funções para exclusão e cópia dos documentos
+      await bkESCivis();
+      await bkESVeiculosCivis();
+      await bkESMilDuranteExpediente();
+      await bkESMilForaExpediente();
+      await bkESVtrPelotao();
+      await bkVtrOutraOm();
+      await bkRoteiroGuarda();
+      await bkParteSgtPerm();
+
+      // Simular um tempo de espera (pode ser removido)
+      setTimeout(() => {
+        setProgresso(false);
+        setConcluido(true);
+        window.location.href = '/homePage';
+      }, 10000);
+
+    } catch (error) {
+      console.error("Erro ao processar:", error);
+    } finally {
+      // setProgresso(false);
+    }
   }
 
   return (
@@ -480,9 +497,7 @@ export default function ArmazenarServico() {
               ></button>
             </div>
             <div className="modal-body">
-              Os dados ficarão disponíveis apenas para consulta e impressão por
-              um período de 24 horas (Até a passagem do serviço atual) no Menu
-              "Serviço Anterior".
+              Os dados ficarão disponíveis apenas para consulta e impressão por um período de 24 horas (Até a passagem do serviço atual) no Menu -Serviço Anterior-.
             </div>
             <div className="modal-footer">
               <button
@@ -492,13 +507,25 @@ export default function ArmazenarServico() {
               >
                 Fechar
               </button>
-              <button
+              {concluido ? <button
                 type="button"
-                className="btn btn-danger"
-                onClick={handleArmazenarServico}
+                className="btn btn-success"
+                disabled
               >
-                Armazenar Serviço
+                Operação Concluída!
               </button>
+                : progresso ? <button className="btn btn-danger" type="button" disabled>
+                  <span className="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                  <span role="status"> Em progresso...</span>
+                </button>
+                  : <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={handleArmazenarServico}
+                  >
+                    Armazenar Serviço
+                  </button>}
+
             </div>
           </div>
         </div>
